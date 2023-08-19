@@ -39,7 +39,7 @@ bool cmp(vector<int>& v1, vector<int>& v2) {
 class Solution{
 public:
     
-    int kruskul(vector<vector<int>> adj, int n, int pick, int npick = -1){
+    int kruskul(vector<vector<int>> adj, int n, int pick, int npick){
         
         int sum = 0;
         DisjointSet *dj = new DisjointSet(n+1);
@@ -56,8 +56,6 @@ public:
              
             int u = dj->findParent(adj[i][1]);
             int v = dj->findParent(adj[i][0]);
-            
-            // cout<<adj[i][1]<<' '<<adj[i][0]<<'\n'<<u<<' '<<v<<"\n\n";
         
             if(u == v) continue;
             sum += adj[i][2];
@@ -81,17 +79,14 @@ public:
         sort(edges.begin(), edges.end(), cmp);
 
         int minSum = kruskul(edges, n, -1, -1);
-        // cout<<minSum<<'\n';
         
         for(int i=0; i<edges.size(); i++){
             
-            int newSum = kruskul(edges, n, i);
-            // int newSum = 0;
+            int newSum = kruskul(edges, n, i, -1);
             if(newSum > minSum) ans[0].push_back(edges[i][3]);
             else{
-                int newSum2 = kruskul(edges, n, -1, i);
-                // cout<<newSum<<' '<<newSum2<<'\n';
-                if(newSum2 == minSum) ans[1].push_back(edges[i][3]);
+                newSum = kruskul(edges, n, -1, i);
+                if(newSum == minSum) ans[1].push_back(edges[i][3]);
             }
         }
         
