@@ -12,9 +12,7 @@ public:
                 
                 int k = n/str.size();
                 string temp;
-                while(k--){
-                    temp += str;
-                }
+                while(k--) temp += str;
                 if(temp == s) return 1;
             }
         }
