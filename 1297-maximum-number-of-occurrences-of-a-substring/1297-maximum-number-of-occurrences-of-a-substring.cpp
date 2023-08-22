@@ -1,5 +1,7 @@
 class Solution{
     int ans;
+    unordered_map<char, int> mpS;
+    unordered_map<string, int> mp;
 public:
     
     void f(int k, string &s, int &maxLetters){
@@ -7,8 +9,6 @@ public:
         int n = s.size();
         int i = 0;
         int j = 0;
-        map<char, int> mpS;
-        map<string, int> mp;
         string str;
         
         while(j < n){
@@ -19,7 +19,7 @@ public:
             else{
                 
                 if(mpS.size() <= maxLetters){
-        
+                
                     mp[str]++;
                     ans = max(ans, mp[str]);
                     
@@ -37,6 +37,8 @@ public:
         
         ans = 0;
         for(int i=minSize; i<=maxSize; i++){
+            mpS.clear();
+            mp.clear();
             f(i, s, maxLetters);
         }
         return ans;
