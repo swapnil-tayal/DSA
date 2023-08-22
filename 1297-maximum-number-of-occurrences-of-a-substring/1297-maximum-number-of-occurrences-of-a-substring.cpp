@@ -25,7 +25,7 @@ public:
                     
                 }
                 mpS[s[i]]--;
-                str.erase(0, 1);
+                str = str.substr(1);
                 if(mpS[s[i]] == 0) mpS.erase(s[i]);
                 i++;
                 j++;
