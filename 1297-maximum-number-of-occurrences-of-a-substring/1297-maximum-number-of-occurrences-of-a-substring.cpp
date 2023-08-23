@@ -36,7 +36,7 @@ public:
     int maxFreq(string s, int maxLetters, int minSize, int maxSize) {
         
         ans = 0;
-        for(int i=minSize; i<=maxSize; i++){
+        for(int i=minSize; i<=minSize; i++){
             mpS.clear();
             mp.clear();
             f(i, s, maxLetters);
