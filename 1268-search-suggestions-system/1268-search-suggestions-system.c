@@ -68,7 +68,7 @@ void help(trie_node_t *node, char ***result, int i_res, int *i_col, char *search
 
 
 char ***suggestedProducts(char **products, int productsSize, char *searchWord, int *returnSize, int **returnColumnSizes) {
-    qsort(products, productsSize, sizeof(const char*), cmpfunc);
+    // qsort(products, productsSize, sizeof(const char*), cmpfunc);
     int search_len = strlen(searchWord);
     *returnSize = search_len;
 
