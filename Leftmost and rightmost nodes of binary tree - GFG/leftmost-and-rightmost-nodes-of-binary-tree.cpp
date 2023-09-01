@@ -136,34 +136,31 @@ void printCorner(Node *root){
     queue<Node*> q;
     q.push(root);
     
-    // cout<<root->data<<' ';
     int f = 1;
     
     while(!q.empty()){
         
         int n = q.size();
-        // int first = -1;
-        // int last = -1;
         
         vector<int> arr;
+        int cnt = 0;
+        int first = -1, last = -1;
         
         while(n--){
             
             Node* node = q.front();
             q.pop();
-            arr.push_back(node->data);
+            cnt++;
             
-            // cout<<node->data<<' ';
+            if(first == -1) first = node->data;
+            else last = node->data;
+            
         
             if(node->left) q.push(node->left);
             if(node->right) q.push(node->right);
             
-            // if(first = -1) first = node->data;
-            // else last = node->data;
         }
-        if(arr.size() == 1) cout<<arr[0]<<' ';
-        else cout<<arr[0]<<' '<<arr[arr.size()-1]<<' ';
-        // for(auto i: arr) cout<<i<<' ';
-        // cout<<'\n';
+        if(cnt == 1) cout<<first<<' ';
+        else cout<<first<<' '<<last<<' ';
     }
 }
