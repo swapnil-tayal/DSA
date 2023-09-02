@@ -115,35 +115,36 @@ class Solution{
     vector<int> arr;
 public:
 
-    void dfs(Node* root, int cnt){
-      
-        if(!root) return;
-        
-        if(!root->left and !root->right){
-            arr.push_back(cnt);
-        }
-        
-        dfs(root->left, cnt+1);
-        dfs(root->right, cnt+1);
-        return;
-    }
 
 
     int getCount(Node *root, int k){
         //code here
         
-        dfs(root, 1);
-        sort(arr.begin(), arr.end());
+        queue<pair<Node*,int>> q;
+        q.push({root, 1});
+        int ans = 0;
         
-        int cnt = 0;
-        for(int i=0; i<arr.size(); i++){
+        while(!q.empty()){
             
-            k -= arr[i];
+            Node* node = q.front().first;
+            int cnt = q.front().second;
+            q.pop();
             
-            if(k >= 0) cnt++;
-            else break;
+            if(!node->left and !node->right){
+                
+                k -= cnt;
+                if(k >= 0) ans++;
+                else break;
+            }
+            
+            if(node->left != NULL){
+                q.push({node->left, cnt+1});
+            }
+            if(node->right != NULL){
+                q.push({node->right, cnt+1});
+            }
         }
-        return cnt;
+        return ans;
         
     }
 };
