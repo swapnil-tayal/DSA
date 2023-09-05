@@ -17,20 +17,28 @@ const int mod = 1e9 + 7;
 class Solution {
 public:
     
-    long long f(int i, int k, int maxSum, vector<int> &a, map<vector<int>, int> &dp){
+    long long f(int i, int k, int maxSum, vector<int> &a, map<string, int> &dp){
         
         if(k < 0) return 0;
         if(maxSum < 0) return 0;
         if(i == a.size()){
             return (k==0 and maxSum==0);
         }
-        if(dp.find({i, k, maxSum}) != dp.end()) return dp[{i, k, maxSum}];
+        
+        string str;
+        str += to_string(i);
+        str += ".";
+        str += to_string(k);
+        str += ".";
+        str += to_string(maxSum);
+        
+        if(dp.find(str) != dp.end()) return dp[str];
         
         long long npick = f(i+1, k, maxSum, a, dp);
         long long x = a[i] % mod;
         long long y = f(i+1, k-1, maxSum - a[i], a, dp) % mod;
         long long pick = ((x) * (y)) % mod;
-        return dp[{i, k, maxSum}] = (pick + npick) % mod;
+        return dp[str] = (pick + npick) % mod;
     }
     
     int countKSubsequencesWithMaxBeauty(string s, int k){
@@ -49,11 +57,7 @@ public:
         for(int i=0; i<k; i++){
             maxSum += newArr[i];
         }
-        // cout<<maxSum<<'\n';
-        
-        // for(auto i: newArr) cout<<i<<' ';
-        
-        map<vector<int>, int> dp;
+        map<string, int> dp;
         return f(0, k, maxSum, newArr, dp);
     }
 };
