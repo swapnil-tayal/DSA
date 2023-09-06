@@ -44,11 +44,9 @@ public:
         int d = (n)/k;
         
         int extra = n%k;
-        // cout<<d<<' '<<extra<<'\n';
         
-        // cout<<head->next->val<<'\n';
         int x = d;
-        // cout<<x<<'\n';
+    
         ListNode* insertHead = new ListNode(head->val);
         ListNode* tempInsert = insertHead;
         head = head->next;
@@ -62,6 +60,7 @@ public:
                 extra--;
                 head = head->next;
             }
+            
             if(x == 1){
                 
                 ans.push_back(insertHead);
