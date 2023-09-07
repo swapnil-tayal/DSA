@@ -1,15 +1,16 @@
 class TreeAncestor {
     
     vector<vector<int>> table;
+    const int MAX = 16;
 public:
     TreeAncestor(int n, vector<int>& parent) {
         
-        table.resize(n, vector<int>(20, -1));
+        table.resize(n, vector<int>(MAX, -1));
         
         for(int i=0; i<n; i++){    
             table[i][0] = parent[i];
         }
-        for(int j=1; j<20; j++){
+        for(int j=1; j<MAX; j++){
             for(int i=0; i<n; i++){
 
                 if(table[i][j-1] == -1) table[i][j] = -1;
@@ -26,7 +27,7 @@ public:
     int getKthAncestor(int node, int k) {
         
         int x = node;
-        for(int i=0; i<20; i++){
+        for(int i=0; i<MAX; i++){
             
             int mask = (1<<i);
             if((k & mask) > 0){
