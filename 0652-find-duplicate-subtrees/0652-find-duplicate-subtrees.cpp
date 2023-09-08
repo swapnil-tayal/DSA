@@ -11,7 +11,7 @@
  */
 class Solution{
     
-    map<string, vector<TreeNode*>> mp;
+    map<string, int> mp;
     vector<TreeNode*> ans;
 public:
     
@@ -28,8 +28,8 @@ public:
         str += s2;
         str += ')';
         
-        mp[str].push_back(root);
-        if(mp[str].size() == 2) ans.push_back(root);
+        mp[str]++;
+        if(mp[str] == 2) ans.push_back(root);
         return str;
     }
     
