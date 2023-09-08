@@ -39,12 +39,7 @@ public:
     int lca(int a, int b){
         
         if(level[a] < level[b]) swap(a, b);
-        // cout<<a<<' ';
-        // cout<<level[a];
         int diff = level[a] - level[b];
-        // int diff = 0;
-        // cout<<diff<<'\n';
-        // return 0;
         
         for(int i=0; i<MAX; i++){
             
@@ -67,7 +62,6 @@ public:
             }
         }
         return parent[a];
-        // cout<<a<<' '<<b<<'\n';
     }
     
     vector<int> minOperationsQueries(int n, vector<vector<int>>& edges, vector<vector<int>>& queries) {
@@ -77,11 +71,6 @@ public:
         vis.resize(n, 0);
         level.resize(n, 0);
         freq.resize(n);
-
-        // if(edges.size() == 0){
-        //     vector<int> ans(queries.size(), 0);
-        //     return ans;
-        // }
         
         vector<pair<int,int>> adj[n];
         for(auto i: edges){
@@ -91,32 +80,13 @@ public:
         
         vector<int> freqTemp(27, 0);
         dfsPar(0, -1, adj, 0, freqTemp);
-     
-        // for(auto i: level) cout<<i<<' ';
-        // cout<<'\n';
-        // return {};
-        // for(int i=0; i<n; i++){
-        //     for(int j=1; j<27; j++){
-        //         cout<<freq[i][j]<<' ';
-        //     }cout<<'\n';
-        // }        
+        
         makeTable(n);
-        // for(int i=0; i<n; i++){
-        //     for(int j=1; j<3; j++){
-        //         cout<<table[i][j]<<' ';
-        //     }cout<<'\n';
-        // }
 
-        // int LCA = lca(5, 4);
-        // return {};
-        
-        
-
-        
         vector<int> ans;
         for(auto it: queries){
 
-            vector<int> newFreq(27, -1);
+            // vector<int> newFreq(27, -1);
             int a = it[0];
             int b = it[1];
             int sum = 0;
@@ -126,14 +96,12 @@ public:
             
             for(int i=0; i<27; i++){
 
-                newFreq[i] = freq[a][i] + freq[b][i] - 2*freq[LCA][i];
-                sum += newFreq[i];
-                maxFreq = max(maxFreq, newFreq[i]);
+                // newFreq[i] = freq[a][i] + freq[b][i] - 2*freq[LCA][i];
+                sum += freq[a][i] + freq[b][i] - 2*freq[LCA][i];
+                maxFreq = max(maxFreq, freq[a][i] + freq[b][i] - 2*freq[LCA][i]);
             }
             sum -= maxFreq;
             ans.push_back(sum);
-        // for(auto i: newFreq) cout<<i<<" ";
-        // cout<<'\n';
         }
         
         return ans;
