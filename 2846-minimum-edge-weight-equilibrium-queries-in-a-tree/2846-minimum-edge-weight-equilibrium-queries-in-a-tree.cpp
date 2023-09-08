@@ -86,7 +86,7 @@ public:
         vector<int> ans;
         for(auto it: queries){
 
-            // vector<int> newFreq(27, -1);
+            vector<int> newFreq(27, -1);
             int a = it[0];
             int b = it[1];
             int sum = 0;
@@ -96,9 +96,9 @@ public:
             
             for(int i=0; i<27; i++){
 
-                // newFreq[i] = freq[a][i] + freq[b][i] - 2*freq[LCA][i];
-                sum += freq[a][i] + freq[b][i] - 2*freq[LCA][i];
-                maxFreq = max(maxFreq, freq[a][i] + freq[b][i] - 2*freq[LCA][i]);
+                newFreq[i] = freq[a][i] + freq[b][i] - 2*freq[LCA][i];
+                sum += newFreq[i];
+                maxFreq = max(maxFreq, newFreq[i]);
             }
             sum -= maxFreq;
             ans.push_back(sum);
