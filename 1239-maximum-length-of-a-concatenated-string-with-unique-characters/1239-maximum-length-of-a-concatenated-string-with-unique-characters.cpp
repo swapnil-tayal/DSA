@@ -8,17 +8,13 @@ public:
             if(st.count(i)) return -1;
             st.insert(i);
         }
-        
-        if(n == -1){
-            return st.size();
-        }
+        if(n == -1) return st.size();
         
         string str;
         str += to_string(n);
         str += temp;
         
-        if(dp.count(str)) return dp[str];
-        
+        // if(dp.count(str)) return dp[str];
         
         int pick = solve(arr, n-1, temp+arr[n], dp);
         int npick = solve(arr, n-1, temp, dp);
