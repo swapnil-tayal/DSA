@@ -3,7 +3,7 @@ public:
     vector<vector<int>> groupThePeople(vector<int>& groupSizes) {
         
         int n = groupSizes.size();
-        map<int, vector<vector<int>>> mp;
+        unordered_map<int, vector<vector<int>>> mp;
         
         for(int i=0; i<n; i++){
             
