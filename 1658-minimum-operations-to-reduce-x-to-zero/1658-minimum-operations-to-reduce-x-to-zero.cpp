@@ -4,18 +4,18 @@ public:
     int minOperations(vector<int>& nums, int x) {
     
         int n = nums.size();
-        vector<int> pre(n), suf(n);
+        vector<int> pre(n);
         pre[0] = nums[0];
-        suf[n-1] = nums[n-1];
-        map<int,int> mp;
+        int suf = nums[n-1];
+        unordered_map<int,int> mp;
         
         for(int i=1; i<n; i++){
             pre[i] = pre[i-1] + nums[i];
         }
-        mp[nums[n-1]] = n-1;
+        mp[suf] = n-1;
         for(int i=n-2; i>=0; i--){
-            suf[i] = suf[i+1] + nums[i];
-            mp[suf[i]] = max(mp[suf[i]], i); 
+            suf += nums[i];
+            mp[suf] = max(mp[suf], i); 
         }
         
         int ans = 1e9;
