@@ -1,48 +1,35 @@
 class Solution {
 public:
-    
-    int f(int mid, vector<int> &nums, int k){
-        
-        // cout<<mid<<' ';
-        if(mid == 0) return 1;
+    int maxFrequency(vector<int>& nums, int k) {
         
         int n = nums.size();
+        sort(nums.begin(), nums.end());
         
         int i = 0;
         int j = 0;
+        int ans = 0;
         long long sm = 0;
+        
         while(j < n){
             
             sm += nums[j];
-            if(j-i+1 < mid) j++;
-            else{
+            long long req = (long long)(j-i+1)*(long long)nums[j];
+            
+            if(req-sm <= k){
                 
-                long long req = (long long)nums[j]*(long long)mid;
-                // if(mid == 1) cout<<req<<' '<<sm<<'\n';
-                if(sm <= req and k >= req - sm) return 1;
-                sm -= nums[i];
-                i++;
+                ans = max(ans, j-i+1);
+                j++;
+            
+            }else{
+                
+                while(req - sm > k){
+                    sm -= nums[i];
+                    req -= nums[j];
+                    i++;
+                }
+                ans = max(ans, j-i+1);
                 j++;
             }
-        }
-        return 0;
-    }
-    
-    int maxFrequency(vector<int>& nums, int k) {
-        
-        int s = 0;
-        int e = 1e5;
-        int ans = 0;
-        sort(nums.begin(), nums.end());
-        
-        while(s <= e){
-            
-            int mid = (s+e)/2;
-            if(f(mid, nums, k)){
-                
-                ans = mid;
-                s = mid+1;
-            }else e = mid-1;
         }
         return ans;
     }
