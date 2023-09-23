@@ -1,38 +1,49 @@
-class Solution{
-    
-    map<string,int> mp;
+bool cmp(string &s1, string &s2){
+    return s1.size() < s2.size();
+}
+class Solution {
 public:
     
-    int f(int i, vector<string> &words, vector<int> &dp){
+    int check(string &s1, string &s2){
         
-        if(dp[i] != -1) return dp[i];
-        
-        int ans = 0;
-        for(int j=0; j<words[i].size(); j++){
-            string str;
-            for(int k=0; k<words[i].size(); k++){
-                if(j != k) str += words[i][k];
-            }
-            if(mp.find(str) != mp.end()){
-                ans = max(ans, f(mp[str], words, dp));
-            }
+        if(s1.size()+1 != s2.size()) return 0;
+        int j = 0;
+        for(int i=0; i<s2.size(); i++){
+            if(s2[i] == s1[j]) j++;
+            if(j == s1.size()) return 1;
         }
-        return dp[i] = 1 + ans;
+        return j == s1.size();
+    }
+    
+    int f(int i, int prev, vector<string> &words, vector<vector<int>> &dp){
+        
+        if(i == words.size()) return 0;
+        if(dp[i][prev+1] != -1) return dp[i][prev+1];
+        
+        int pick = 0;
+        int npick = 0;
+        
+        if(prev == -1){
+            pick = 1 + f(i+1, i, words, dp);
+            npick = f(i+1, prev, words, dp);
+        
+        }else{
+            if(check(words[prev], words[i])){
+                pick = 1 + f(i+1, i, words, dp);
+            }
+            npick = f(i+1, prev, words, dp);
+        }
+        return dp[i][prev+1] = max(pick, npick);
     }
     
     int longestStrChain(vector<string>& words) {
         
-        int ans = 1;
+        sort(words.begin(), words.end(), cmp);
+        
+        // for(auto i: words) cout<<i<<' ';
+        // return -1;
         int n = words.size();
-        
-        for(int i=0; i<n; i++){
-            mp[words[i]] = i;
-        }
-        vector<int> dp(n, -1);
-        
-        for(int i=0; i<n; i++){
-            ans = max(ans, f(i, words, dp));
-        }
-        return ans;
+        vector<vector<int>> dp(n, vector<int>(n+1, -1));
+        return f(0, -1, words, dp);
     }
 };
