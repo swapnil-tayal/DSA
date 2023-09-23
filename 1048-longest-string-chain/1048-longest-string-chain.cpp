@@ -28,9 +28,9 @@ public:
         for(int i=0; i<n; i++){
             mp[words[i]] = i;
         }
-        vector<int> dp(n, -1);
         
         for(int i=0; i<n; i++){
+            vector<int> dp(n, -1);
             ans = max(ans, f(i, words, dp));
         }
         return ans;
