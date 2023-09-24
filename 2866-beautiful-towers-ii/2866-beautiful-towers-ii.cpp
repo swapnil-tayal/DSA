@@ -33,16 +33,10 @@ public:
         vector<long long> pre = findPreSuf(a);
         reverse(a.begin(), a.end());
         vector<long long> suf = findPreSuf(a);
-        reverse(suf.begin(), suf.end());
-        
-        // for(auto i: pre) cout<<i<<' ';
-        // cout<<'\n';
-        // for(auto j: suf) cout<<j<<' ';
-        // cout<<'\n';
         
         long long ans = 0;
         for(int i=0; i<n; i++){
-            ans = max(ans, pre[i] + suf[i] - a[n-i-1]);
+            ans = max(ans, pre[i] + suf[n-i-1] - a[n-i-1]);
         }
         return ans;
     }
