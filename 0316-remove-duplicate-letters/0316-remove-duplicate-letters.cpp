@@ -7,7 +7,6 @@ public:
         for(int i=0; i<s.size(); i++){
             mp[s[i]].push_back(i);
         }
-        // for(auto i: mp['d']) cout<<i<<' ';
         
         vector<int> vis(26, 0); 
         stack<int> st;
@@ -30,16 +29,12 @@ public:
                 }
                 else{
                     
-                    if(i == 5) cout<<(char)st.top()<<' ';
-                    
                     while(!st.empty() and st.top() > s[i]){
+                        
                         char ch = st.top();
-                        int ind = upper_bound( mp[ch].begin(), mp[ch].end(), i ) - mp[ch].begin();
-
-                        // if(i == 5){
-                            // cout<<ind<<' '<<ch<<' ';
-                        // }
-                        if(ind != mp[ch].size()){
+                        int ind = mp[ch].back();
+                        
+                        if(ind > i){
                             vis[st.top()-'a'] = 0;
                             st.pop();
                         }
@@ -52,10 +47,12 @@ public:
         }
         string str;
         while(!st.empty()){
-            str += st.top();
+            string temp;
+            temp += st.top();
+            temp += str;
+            str = temp;
             st.pop();
         }
-        reverse(str.begin(), str.end());
         return str;
     }
 };
