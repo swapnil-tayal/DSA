@@ -31,9 +31,6 @@ public:
             vector<int> temp;
             dfs(i, adj, vis, temp);
             
-            // for(auto &it: temp) cout<<it<<' ';
-            // cout<<'\n';
-            
             if(temp.back() == temp[0]){
                 for(auto &it: temp){
                     ans[it] = temp.size()-1;
@@ -66,9 +63,6 @@ public:
                     for(int j=it; j<temp.size(); j++){
                         ans[temp[j]] = k; 
                     }
-                    // cout<<it<<' ';
-                    // cout<<temp[it]<<' ';
-                    // cout<<k<<' ';
                     it--;
                     while(it >= 0){
                         ans[temp[it]] = ++k;
