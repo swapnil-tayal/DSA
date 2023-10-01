@@ -1,9 +1,9 @@
 class Solution{
+    int n;
 public:
     
     int minOperations(vector<int>& nums, int x) {
     
-        int n = nums.size();
         vector<long long> pre(n);
         pre[0] = nums[0];
         long long suf = nums[n-1];
@@ -40,6 +40,7 @@ public:
                 }   
             }else break;
         }
+        
         int i = 0;
         int j = 0;
         int sum = 0;
@@ -64,12 +65,11 @@ public:
     int minSizeSubarray(vector<int>& nums, int target) {
         
         long long sum = 0;
-        int n = nums.size();
+        this->n = nums.size();
         for(auto &i: nums) sum += i;
-        // cout<<sum<<' ';
         
         int ans = (target/sum)*n;
-        // cout<<ans<<' ';
+
         int k = minOperations(nums, target%sum);
         return (k == 1e9) ? -1 : ans+k;
     }
