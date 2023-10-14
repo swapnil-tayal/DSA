@@ -19,7 +19,7 @@ public:
     int paintWalls(vector<int>& cost, vector<int>& time) {
         
         this->n = cost.size();
-        vector<vector<int>> dp(n, vector<int>(2*n+10, -1));
+        vector<vector<int>> dp(n, vector<int>(2*n+1, -1));
         return f(0, cost, time, 0, dp);
     }
 };
