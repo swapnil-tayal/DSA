@@ -15,26 +15,26 @@ public:
             ans += f(i-1, 2, dp) % mod
             ans += f(i-1, 3, dp) % mod
             ans += f(i-1, 4, dp) % mod
-            ans += f(i-1, 5, dp) % mod;
+            ans += f(i-1, 5, dp) % mod
         
         }else if(prev == 1) {
-            ans = f(i-1, 2, dp) % mod;
+            ans = f(i-1, 2, dp) % mod
  
         }else if(prev == 2){
             ans += f(i-1, 1, dp) % mod
-            ans += f(i-1, 3, dp) % mod; 
+            ans += f(i-1, 3, dp) % mod
         
         }else if(prev == 3){
-            ans += f(i-1, 1, dp) % mod; 
-            ans += f(i-1, 2, dp) % mod; 
-            ans += f(i-1, 4, dp) % mod; 
-            ans += f(i-1, 5, dp) % mod;
+            ans += f(i-1, 1, dp) % mod
+            ans += f(i-1, 2, dp) % mod
+            ans += f(i-1, 4, dp) % mod
+            ans += f(i-1, 5, dp) % mod
 
         }else if(prev == 4){
             ans += f(i-1, 3, dp) % mod
-            ans += f(i-1, 5, dp) % mod;
+            ans += f(i-1, 5, dp) % mod
 
-        }else ans = f(i-1, 1, dp) % mod;
+        }else ans = f(i-1, 1, dp) % mod
         
         return dp[i][prev] = ans % mod;
     }
