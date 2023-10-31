@@ -10,7 +10,7 @@ public:
         
         for(int i=1; i<n; i++){
             
-            ans[i] = x ^ pref[i];
+            ans[i] = x xor pref[i];
             x = pref[i];
         }
         return ans;
