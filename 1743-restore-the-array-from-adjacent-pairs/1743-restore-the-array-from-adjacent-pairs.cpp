@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> restoreArray(vector<vector<int>>& a) {
         
-        map<int,vector<int>> mp;
+        unordered_map<int,vector<int>> mp;
         for(auto i: a){
             mp[i[0]].push_back(i[1]);
             mp[i[1]].push_back(i[0]);
@@ -32,8 +32,6 @@ public:
                 }else ans.push_back(i);
             }
             start = ans.back();
-            // for(auto k: ans) cout<<k<<' ';
-            // cout<<'\n';
             if(ans.size() >= a.size()+1) break;
         }
         return ans;
