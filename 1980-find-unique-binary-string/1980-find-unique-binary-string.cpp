@@ -33,7 +33,7 @@ public:
         // cout<<'\n';
         int sz = nums[0].size();
         
-        for(int i=0; i<=70000; i++){
+        for(int i=0; i<=65536; i++){
             if(st.count(i) == 0){
                 string s = f2(i);
                 // cout<<i<<' ';
