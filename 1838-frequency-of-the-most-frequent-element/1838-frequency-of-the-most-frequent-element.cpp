@@ -7,28 +7,28 @@ public:
         
         int i = 0;
         int j = 0;
-        int ans = 0;
-        long long sm = 0;
+        long long ans = 0;
+        long long sum = 0;
         
         while(j < n){
             
-            sm += nums[j];
-            long long req = (long long)(j-i+1)*(long long)nums[j];
+            sum += nums[j];
+            long long req = (long long)nums[j] * (long long)(j-i+1);
             
-            if(req-sm <= k){
-                
-                ans = max(ans, j-i+1);
+            if(sum + k >= req){
+                ans = max(ans, (long long)j-i+1);
                 j++;
-            
-            }else{
-                
-                while(req - sm > k){
-                    sm -= nums[i];
+            }
+            else{
+                while(i<n and sum+k < req){
+                    sum -= nums[i];
                     req -= nums[j];
                     i++;
                 }
-                ans = max(ans, j-i+1);
                 j++;
+                // if(sum+k >= req){
+                    // ans = max(ans, (long long)j-i+1);
+                // }
             }
         }
         return ans;
