@@ -3,22 +3,26 @@ public:
     int reductionOperations(vector<int>& nums) {
         
         int n = nums.size();
-        map<int,int> mp;
-        priority_queue<int> pq;
-        for(auto i: nums){
-            mp[i]++;
-        }
-        for(auto i: mp){
-            pq.push(i.first);
+        sort(nums.rbegin(), nums.rend());
+        
+        int i = 0;
+        int k = nums[0];
+        int cnt = 0;
+        while(i<n and k==nums[i]){
+            cnt++;
+            i++;
         }
         int ans = 0;
-        
-        while(pq.size() > 1){
+        while(i < n){
             
-            int x = mp[pq.top()];
-            pq.pop();
-            ans += x;
-            mp[pq.top()] += x;
+            int k = nums[i];
+            int temp = 0;
+            while(i < n and nums[i] == k){
+                temp++;
+                i++;
+            }
+            ans += cnt;
+            cnt += temp;
         }
         return ans;
     }
