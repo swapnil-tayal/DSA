@@ -32,12 +32,14 @@ public:
         for(int i=0; i<n; i++){
             
             vector<int> temp;
+            priority_queue<int> pq;
             for(int j=0; j<m; j++){
-                temp.push_back(grid[i][j]);
+                pq.push(grid[i][j]);
             }
-            sort(temp.rbegin(), temp.rend());
-            for(int k=0; k<m; k++){
-                ans = max(ans, temp[k]*(k+1));
+            int k = 1;
+            while(!pq.empty()){
+                ans = max(ans, pq.top()*(k++));
+                pq.pop();
             }
         }
         
