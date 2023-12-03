@@ -18,6 +18,7 @@ public:
                     i++;
                 }
             }
+            
             mp[str[j]]++;
             
             if(j-i+1 < size) j++;
@@ -43,10 +44,9 @@ public:
         int ans = 0;
         int i = 1;
         if(k == 1) i = 2;
-        for(i; i<26; i++){
+        for(i; i<=26; i++){
             ans += f(str, k*i, k);
         }
-        if(k == 3846 and str[1] == 'a') ans++;
         if(k == 1) ans += str.size();
         return ans;
     }
