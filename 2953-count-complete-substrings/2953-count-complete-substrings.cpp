@@ -5,7 +5,7 @@ public:
         
         int i = 0;
         int j = 1;
-        map<char,int> mp;
+        unordered_map<char,int> mp;
         mp[str[0]]++;
         int n = str.size();
         int cnt = 0;
@@ -18,9 +18,7 @@ public:
                     i++;
                 }
             }
-            
             mp[str[j]]++;
-            
             if(j-i+1 < size) j++;
             else{
                 
