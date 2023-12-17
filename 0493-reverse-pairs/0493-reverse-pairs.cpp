@@ -10,21 +10,17 @@ public:
         
         vector<int> a;
         for(int i=s1; i<=m; i++) a.push_back(arr[i]);
+        int g = a.size();
         
         for(int i=m+1; i<=e2; i++){
             
             int ind = lower_bound(a.begin(), a.end(), (long long)(2*(long long)arr[i])+ 1) - a.begin();
-            if(ind == arr.size()) continue;
-            ans += a.size() - ind;
+            ans += g - ind;
         }
         
         while(i <= m and j <= e2){
             if(arr[i] < arr[j]) temp.push_back(arr[i++]);
             else{
-                if(arr[i] > 2*(long long)arr[j]){
-                    // cout<<i<<' '<<j<<'\n';
-                    // ans += (m-i+1);
-                }
                 temp.push_back(arr[j++]);
             }
         }
