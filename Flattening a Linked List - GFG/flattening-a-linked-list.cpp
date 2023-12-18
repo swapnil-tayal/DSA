@@ -148,7 +148,6 @@ Node *flatten(Node *root){
    // Your code here
     if(!root->next) return root;
     Node* head = root;
-    Node* ans = head;
     Node* temp = head->next;
    
     while(temp){
