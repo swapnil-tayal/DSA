@@ -1,50 +1,32 @@
 class Solution {
 public:
     
-    void nextPermutation(vector<int>& nums) {
-        
-        int n = nums.size();
-        if(n == 1) return;
-        int i = n-1;
-        int val = -1;
-        
-        while(i > 0){
-            if(nums[i] > nums[i-1]){
-                val = i-1;
-                break;
-            }i--;
-        }
-        if(val == -1){
-            sort(nums.begin(), nums.end());
-            return;
-        }
-        
-        int val2 = i;
-        int ac = n;
-        for(int k=i; k<n; k++){
-            if(nums[k] > nums[val]){
-                if(ac > nums[k] and nums[val] < nums[k]){
-                    ac = nums[k];
-                    val2 = k;
-                }
-            }
-        }
-        swap(nums[val], nums[val2]);
-        sort(nums.begin()+val+1, nums.end());
-    }
+    int fact(unsigned int n){ 
+        if (n == 0) 
+            return 1; 
+        return n * fact(n - 1); 
+    } 
     
     string getPermutation(int n, int k) {
         
         vector<int> num;
-        for(int i=1; i<=n; i++) num.push_back(i);
+        // int fact = 1;
+        for(int i=1; i<n; i++){
+            // fact = fact*i;
+            num.push_back(i);
+        }
+        num.push_back(n);
+        string ans = "";
         k--;
-        while(k--){
-            nextPermutation(num);
+        while(true){    
+            
+            ans += to_string(num[ k / fact(n-1) ]);
+            num.erase(num.begin() + k / fact(n-1));
+            if(num.size() == 0) break;
+            k = k % fact(n-1);
+            n--;
+            
         }
-        string str;
-        for(auto &i: num){
-            str += to_string(i);
-        }
-        return str;
+        return ans;
     }
 };
