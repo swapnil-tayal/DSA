@@ -93,8 +93,6 @@ int main(void) {
 // } Driver Code Ends
 
 
-
-
 /* Node structure  used in the program
 
 struct Node{
@@ -113,27 +111,50 @@ struct Node{
 
 /*  Function which returns the  root of 
     the flattened linked list. */
-Node *flatten(Node *root)
-{
+    
+Node* merge(Node* h1, Node* h2){
+    
+    Node* th1 = h1;
+    Node* th2 = h2;
+    Node* res = new Node(-1);
+    Node* ret = res;
+    
+    while(th1 and th2){
+        
+        if(th1->data < th2->data){
+            res->bottom = new Node(th1->data);
+            th1 = th1->bottom;
+            
+        }else if(th2->data <= th1->data){
+            res->bottom = new Node(th2->data);
+            th2 = th2->bottom;
+            
+        }res = res->bottom;
+    }
+    while(th1){
+        res->bottom = new Node(th1->data);
+        th1 = th1->bottom;
+        res = res->bottom;
+    }
+    while(th2){
+        res->bottom = new Node(th2->data);
+        th2 = th2->bottom;
+        res = res->bottom;
+    }
+    return ret->bottom;
+}
+    
+Node *flatten(Node *root){
    // Your code here
-   vector<int> arr;
-   Node* temp = root;
-   while(temp != NULL){
-       Node* bot = temp;
-       while(bot != NULL){
-           arr.push_back(bot->data);
-           bot = bot->bottom;
-       }temp = temp->next;
-   }
+    if(!root->next) return root;
+    Node* head = root;
+    Node* ans = head;
+    Node* temp = head->next;
    
-   sort(arr.begin(), arr.end());
-   Node* res = new Node(-1);
-   Node* ans = res;
-   for (auto x: arr){
-       ans->bottom = new Node(x);
-       ans = ans->bottom;
-   }
-   
-   return res->bottom;
+    while(temp){
+        head = merge(head, temp);
+        temp = temp->next;
+    }
+    return head;
 }
 
