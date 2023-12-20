@@ -1,50 +1,46 @@
 
+
+
 typedef struct {
-    
-    int start;
+    int str;
     int end;
     int ele;
     int arr[];
-    
 } MyQueue;
 
 
 MyQueue* myQueueCreate() {
     
-    MyQueue *myq = malloc(sizeof(MyQueue) + 2000*sizeof(int));
-    // myq->arr = (int*)malloc(2000*sizeof(int)); 
-    myq->start = -1;
-    myq->end = -1;
-    myq->ele = 0;
-    return myq;
+    MyQueue *q = malloc(sizeof(MyQueue) * 2000*(sizeof(int)));
+    q->str = -1;
+    q->end = -1;
+    q->ele = 0;
+    return q;
 }
 
 void myQueuePush(MyQueue* obj, int x) {
     
     obj->arr[++(obj->end)] = x;
-    (obj->ele)++;
-    if(obj->start == -1) obj->start = 0;
+    obj->ele++;
+    if(obj->str == -1) obj->str = 0;
 }
 
 int myQueuePop(MyQueue* obj) {
-    
-    (obj->ele)--;
-    return obj->arr[(obj->start)++];
+    obj->ele--;
+    int x = obj->arr[(obj->str)++];
+    return x;
 }
 
 int myQueuePeek(MyQueue* obj) {
-    return obj->arr[obj->start];
+    return obj->arr[obj->str];
 }
 
 bool myQueueEmpty(MyQueue* obj) {
-    
-    if(obj->ele == 0) return true;
-    else return false;
+    return obj->ele == 0;
 }
 
 void myQueueFree(MyQueue* obj) {
-    
-    obj->start = -1;
-    obj->end = -1;
     obj->ele = 0;
+    obj->str = -1;
+    obj->end = -1;
 }
