@@ -1,7 +1,7 @@
 char* removeDuplicateLetters(char* s) {
     
     int n = strlen(s);
-    char* st = (char*)malloc((1000000)*sizeof(char));
+    char* st = (char*)malloc((n+1)*sizeof(char));
     int ind = -1;
     
     int mp[26] = {0};
