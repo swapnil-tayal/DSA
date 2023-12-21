@@ -32,8 +32,8 @@
 //     merger(arr, s, mid, e);
 // }
 
-int cmp (int * a, int * b) {
-   return *(int*)a - *(int*)b;
+int cmp(int *a, int *b){
+    return (*(int*)a - *(int*)b);
 }
 
 int maxWidthOfVerticalArea(int** points, int pointsSize, int* pointsColSize) {
@@ -47,9 +47,9 @@ int maxWidthOfVerticalArea(int** points, int pointsSize, int* pointsColSize) {
     qsort(arr, pointsSize, sizeof(int), cmp);
     int ans = 0;
     
-    for(int i=0; i<pointsSize; i++){
-        printf("%d ", arr[i]);
-    }
+//     for(int i=0; i<pointsSize; i++){
+//         printf("%d ", arr[i]);
+//     }
     
     for(int i=1; i<pointsSize; i++){
         if(arr[i] - arr[i-1] > ans){
