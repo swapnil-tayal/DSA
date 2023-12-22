@@ -41,10 +41,6 @@ public:
                 maxCenter = i;
             }    
         }
-        // if(str[maxCenter] == '#'){
-            // cout<<1;
-            maxCenter++;
-        // }
-        return s.substr(( maxCenter-1-maxPali )/2, maxPali);
+        return s.substr(( maxCenter-maxPali )/2, maxPali);
     }
 };
