@@ -1,49 +1,50 @@
 class Solution {
 public:
-    string longestPalindrome(string str) {
+    string longestPalindrome(string s) {
         
-        int n = str.size();
-        int maxL = 0;
-        int maxR = 0;
+        int n = s.size();
+        string str = "#";
+        for(int i=0; i<n; i++){
+            str += s[i];
+            str += '#';
+        }
+        // for(auto i: str) cout<<i<<' ';
+        // cout<<'\n';
         
-        for(int k=0; k<n; k++){
-            
-            int i = k-1;
-            int j = k+1;
-            int s = k;
-            int e = k;
-            
-            while(i >= 0 and j < n){
-                if(str[i] == str[j]){
-                    s--;
-                    e++;
-                    i--; j++;
-                }else break;
+        vector<int> P(str.size(), 0);
+        int center = 0;
+        int right = 0;
+        for(int i=0; i<str.size(); i++){
+             
+            // find corresponding palidromic character
+            int iMirror = center - (i-center);
+            if(right > i){
+                P[i] = min(P[iMirror], right-i);
             }
-            if(e-s+1 > maxR-maxL+1){
-                maxR = e; maxL = s;
+            // expanding around center i
+            int k = P[i];
+            while(i+1+P[i] < str.size() and i-1-P[i] >= 0 and str[i+1+P[i]] == str[i-1-P[i]]){
+                P[i]++;
             }
-            
-            i = k;
-            j = k+1;
-            s = k;
-            e = k;
-            
-            while(i >= 0 and j < n){
-                if(str[i] == str[j]){
-                    s--;
-                    e++;
-                    i--; j++;
-                }else break;
-            }
-            if(e-s+1 > maxR-maxL+1){
-                maxR = e; maxL = s+1;
+            // P[i] = k;
+            // if palidrome centered at i expandes r, update c,r
+            if(i + P[i] > right){
+                center = i;
+                right = i + P[i];
             }
         }
-        
-        string s;
-        for(int i=maxL; i<=maxR; i++) s += str[i];
-        
-        return s;
+        int maxPali = 0;
+        int maxCenter = 0;
+        for(int i=0; i<str.size(); i++){
+            if(maxPali < P[i]){
+                maxPali = P[i];
+                maxCenter = i;
+            }    
+        }
+        // if(str[maxCenter] == '#'){
+            // cout<<1;
+            maxCenter++;
+        // }
+        return s.substr(( maxCenter-1-maxPali )/2, maxPali);
     }
 };
