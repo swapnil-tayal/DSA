@@ -18,8 +18,11 @@ public:
             return root;
         }
         
-        TreeNode* l = lowestCommonAncestor(root->left, p, q);
-        TreeNode* r = lowestCommonAncestor(root->right, p, q);
+        TreeNode* l = NULL;
+        TreeNode* r = NULL;
+        if(p->val <= root->val && q->val <= root->val) l = lowestCommonAncestor(root->left, p, q);
+        else if(p->val >= root->val && q->val >= root->val) r = lowestCommonAncestor(root->right, p, q);
+        else return root;
         
         if(l && r){
             return root;
