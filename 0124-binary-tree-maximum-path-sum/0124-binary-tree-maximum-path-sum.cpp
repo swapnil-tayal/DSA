@@ -24,10 +24,10 @@ public:
             
             int npick1 = f(root->left, 0, dp);
             int npick2 = f(root->right, 0, dp);
-            int pick1 = root->val + f(root->left, 1, dp);
-            int pick2 = root->val + f(root->right, 1, dp);
+            // int pick1 = root->val + f(root->left, 1, dp);
+            // int pick2 = root->val + f(root->right, 1, dp);
             int pick3 = root->val + f(root->left, 1, dp) + f(root->right, 1, dp);
-            return dp[{root, x}] = max({pick1, pick2, pick3, npick1, npick2});
+            return dp[{root, x}] = max({pick3, npick1, npick2});
             
         }else if(x == 1){
             
