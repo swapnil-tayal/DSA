@@ -17,8 +17,8 @@ public:
         if(!root) return true;
         if(!(root->val > mini && root->val < maxi)) return false;
         
-        int left = f(root->left, mini, min(maxi, (long)root->val));
-        int right = f(root->right, max(mini, (long)root->val), maxi);
+        int left = f(root->left, mini, root->val);
+        int right = f(root->right, root->val, maxi);
         return left && right;
     }
     
