@@ -31,4 +31,4 @@ x = 11
 </pre>
 <p><strong><span style="font-size: 18px;">Your Task:-</span></strong><br><span style="font-size: 18px;">You don't need to read input or print anything. Complete the function <strong>floor() </strong>which takes<strong>&nbsp;</strong>the integer&nbsp;<strong>n</strong>&nbsp;and BST&nbsp;and integer x returns the floor&nbsp;value.</span></p>
 <p><strong><span style="font-size: 18px;">Constraint:</span></strong><br><span style="font-size: 18px;">1 &lt;= Noda data &lt;= 10<sup>9</sup><br>1 &lt;= n &lt;= 10<sup>5</sup></span></p>
-<p><span style="font-size: 18px;"><strong>Expected Time Complexity:</strong> O(n)<br><strong>Expected Space Complexity:</strong> O(1)</span></p></div>
+<p><span style="font-size: 18px;"><strong>Expected Time Complexity:</strong> O(height of tree)<br><strong>Expected Space Complexity:</strong>&nbsp;</span><span style="font-size: 18px;">O(height of tree)</span></p></div>
