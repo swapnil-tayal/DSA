@@ -13,17 +13,17 @@ class Solution {
     map<int,int> inD;
 public:
     
-    TreeNode* f(int ps, int pe, int is, int ie, vector<int> &preorder){
+    TreeNode* f(int preS, int indS, int indE, vector<int> &preorder){
         
-        if(is > ie || ps > pe) return NULL;
-        TreeNode* root = new TreeNode(preorder[ps]);
-        int ind = inD[preorder[ps]];
+        if(indS > indE || preS < 0) return NULL;
+        TreeNode* root = new TreeNode(preorder[preS]);
+        int ind = inD[preorder[preS]];
         
-        int leftSize = ind - is;
-        int rightSize = ie - ind;
+        int leftSize = ind - indS;
+        int rightSize = indE - ind;
         
-        root->left = f(ps+1, ps+leftSize, is, ind-1, preorder);
-        root->right = f(ps+leftSize+1, ps+leftSize+rightSize, ind+1, ie, preorder);
+        root->left = f(preS+1, indS, ind-1, preorder);
+        root->right = f(preS+leftSize+1, ind+1, indE, preorder);
         return root;
         
     }
@@ -34,6 +34,6 @@ public:
         for(int i=0; i<n; i++){
             inD[inorder[i]] = i; 
         }
-        return f(0, 0, 0, n-1, preorder);
+        return f(0, 0, n-1, preorder);
     }
 };
