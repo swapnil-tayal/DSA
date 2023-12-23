@@ -25,7 +25,7 @@ public:
     void f(Node* root, int x){
         
         if(!root) return;
-        if(root->data <= x) ans = max(ans, root->data);
+        if(root->data <= x) ans = root->data;
         if(x >= root->data) f(root->right, x);
         else f(root->left, x);
     }
