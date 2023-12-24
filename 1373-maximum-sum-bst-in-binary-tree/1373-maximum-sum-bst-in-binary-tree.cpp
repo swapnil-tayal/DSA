@@ -20,7 +20,7 @@ public:
         vector<int> left = f(root->left);
         vector<int> right = f(root->right);
         bool curr = (root->val > left[1] && root->val < right[0]);
-        int currSum = -10000;
+        int currSum = 0;
         
         if(curr){
             
