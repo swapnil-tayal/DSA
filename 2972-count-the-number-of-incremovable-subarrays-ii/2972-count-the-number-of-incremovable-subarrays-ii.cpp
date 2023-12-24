@@ -31,12 +31,20 @@ public:
             else break;
         }
         vector<int> str, end;
-        for(int i=0; i<=ind1; i++){
-            str.push_back(nums[i]);
-        }
+        // for(int i=0; i<=ind1; i++){
+        //     str.push_back(nums[i]);
+        // }
+        
         for(int i=ind2; i<n; i++){
             end.push_back(nums[i]);
         }
-        return countValid(str, end) + 1;
+        
+        long long ans = 0;
+        for(int i=0; i<=ind1; i++){
+            int ind = lower_bound(end.begin(), end.end(), nums[i]+1) - end.begin();
+            ans += end.size() - ind;
+        }
+        return ans + ind1+1 + end.size() + 1;
+        
     }
 };
