@@ -56,8 +56,7 @@ public:
         for(int i=0; i<n; i++){
             
             if(data[i] == ','){
-                if(val == -29) val = 1001;
-                else if(isNeg) val = -val;
+                if(isNeg) val = -val;
                 isNeg = 0;
                 arr.push_back(val);
                 val = 0;
@@ -73,8 +72,6 @@ public:
     TreeNode* deserialize(string data) {
         
         vector<int> arr = strToArr(data);
-        if(arr.size() == 0) return NULL;
-        // for(auto i: arr) cout<<i<<' ';
         
         queue<TreeNode*> q;
         int i = 0;
