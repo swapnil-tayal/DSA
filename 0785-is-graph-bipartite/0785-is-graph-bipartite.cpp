@@ -1,19 +1,30 @@
 class Solution {
 public:
     
-    bool f(int src, int par, vector<int> &color, vector<vector<int>> &graph){
+    bool f(int src, vector<int> &color, vector<vector<int>> &graph){
         
-        if(par == -1) color[src] = 1;
-        else color[src] = 1 - color[par];
+        queue<pair<int,int>> q;
+        q.push({src, -1});
+        color[src] = 1;
         
-        for(auto i: graph[src]){
+        while(!q.empty()){
             
-            if(i == par) continue;
-            if(color[i] != -1){
+            int node = q.front().first;
+            int par = q.front().second;
+            q.pop();
+            
+            for(auto i: graph[node]){
                 
-                if(color[i] == color[src]) return false;
-            
-            }else if(!f(i, src, color, graph)) return false;
+                if(i == par) continue;
+                if(color[i] != -1){
+                    
+                    if(color[i] == color[node]) return false;
+                
+                }else{
+                    color[i] = 1 - color[node];
+                    q.push({ i, node });
+                }
+            }
         }
         return true;
     }
@@ -26,7 +37,7 @@ public:
         for(int i=0; i<n; i++){
             
             if(color[i] == -1){
-                if(!f(i, -1, color, graph)) return false;
+                if(!f(i, color, graph)) return false;
             }
         }
         return true;
