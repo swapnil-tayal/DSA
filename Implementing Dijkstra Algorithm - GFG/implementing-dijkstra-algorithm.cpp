@@ -11,15 +11,15 @@ class Solution
     vector<int> dijkstra(int V, vector<vector<int>> adj[], int S){
         // Code here
         
-        vector<int> dis(V+1, 1e9);
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        vector<int> dis(V, 1e8);
+        queue<pair<int,int>> pq;
         pq.push({0, S});
         dis[S] = 0;
         
         while(!pq.empty()){
             
-            int node = pq.top().second;
-            int disPar = pq.top().first;
+            int node = pq.front().second;
+            int disPar = pq.front().first;
             pq.pop();
             
             for(auto i: adj[node]){
@@ -31,9 +31,9 @@ class Solution
                 }
             }
         }
-        for(auto &i: dis){
-            if(i == 1e9) i = -1;
-        }
+        // for(auto &i: dis){
+        //     if(i == 1e9) i = -1;
+        // }
         return dis;
     }
 };
