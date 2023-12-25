@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    bool f(string &s, int prev, int i){
+    bool isValid(string &s, int prev, int i){
         
         int n = s.size();
         if(s[prev] == '0') return false;
@@ -14,27 +14,23 @@ public:
         else return false;
     }
     
-    int f(int i, int prev, string &s, vector<vector<int>> &dp){
+    int f(int i, string &s, vector<int> &dp){
         
-        if(i-prev+1 > 2) return 0;
+        if(i == s.size()) return 1;
+        if(dp[i] != -1) return dp[i];
         
-        if(i == s.size()){
-            if(prev == s.size()) return 1;
-            else return 0;
+        int ans = 0;
+        if(i+1 < s.size() && isValid(s, i, i+1)){
+            ans += f(i+2, s, dp);
         }
-        if(dp[i][prev] != -1) return dp[i][prev];
-        
-        int npick = f(i+1, prev, s, dp);
-        int pick = 0;
-        if(f(s, prev, i)) pick = f(i+1, i+1, s, dp);
-        
-        return dp[i][prev] = pick + npick;
+        if(isValid(s, i, i)) ans += f(i+1, s, dp);
+        return dp[i] = ans;
     }
     
     int numDecodings(string s) {
         
         int n = s.size();
-        vector<vector<int>> dp(n, vector<int>(n, -1));
-        return f(0, 0, s, dp);
+        vector<int> dp(n, -1);
+        return f(0, s, dp);
     }
 };
