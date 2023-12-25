@@ -1,36 +1,39 @@
 class Solution {
 public:
-    
-    bool f(int src, vector<int> &vis, vector<int> &dfsVis, vector<int> adj[]){
+    bool canFinish(int numCourses, vector<vector<int>>& pre) {
         
-        vis[src] = 1;
-        dfsVis[src] = 1;
-        for(auto i: adj[src]){
-            
-            if(vis[i]){
-                
-                if(dfsVis[i]) return true;
-                else continue;
-                
-            }else if(f(i, vis, dfsVis, adj)) return true;
-        }
-        dfsVis[src] = 0;
-        return false;
-    }
-    
-    bool canFinish(int n, vector<vector<int>>& a) {
+        vector<int> inD(numCourses);
+        for(auto i: pre) inD[i[1]]++;
+        vector<int> adj[numCourses];
         
-        vector<int> adj[n];
-        for(auto i: a){
+        for(auto i: pre){
             adj[i[0]].push_back(i[1]);
         }
-        vector<int> vis(n, 0);
-        vector<int> dfsVis(n, 0);
-        for(int i=0; i<n; i++){
-            
-            if(vis[i]) continue;
-            if(f(i, vis, dfsVis, adj)) return !true;
+        
+        queue<int> q;
+        vector<int> topo;
+        
+        for(int i=0; i<numCourses; i++){
+            if(inD[i] == 0){
+                q.push(i);
+                topo.push_back(i);
+            }
         }
-        return !false;
+        
+        while(!q.empty()){
+            
+            int node = q.front();
+            q.pop();
+            
+            for(auto i: adj[node]){
+                
+                inD[i]--;
+                if(inD[i] == 0){
+                    q.push(i);
+                    topo.push_back(i);
+                }
+            }
+        }
+        return topo.size() == numCourses;
     }
 };
