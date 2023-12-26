@@ -22,40 +22,39 @@ struct Job
     int profit; // Profit if job is over before or on deadline 
 };
 */
-bool cmp(Job a, Job b){
-    return a.profit > b.profit;
+bool cmp(Job j1, Job j2){
+    return j1.profit > j2.profit;
 }
-
-class Solution{
-    
-    
+class Solution 
+{
     public:
     //Function to find the maximum profit and the number of jobs done.
     vector<int> JobScheduling(Job arr[], int n){ 
         // your code here
-        sort(arr, arr+n, cmp);
-        int maxi = 0;
-        for(int i=0; i<n; i++){
-            maxi = max(maxi, arr[i].dead);
-        }
         
-        vector<int> slot(maxi+1, -1);
-        int cntJob = 0;
-        int profit = 0;
+        sort(arr, arr+n, cmp);
+        
+        int maxiDead = 0;
+        for(int i=0; i<n; i++){
+            maxiDead = max(maxiDead, arr[i].dead);
+        }
+        vector<int> last(maxiDead+1, 0);
+        int cnt = 0;
+        int ans = 0;
         
         for(int i=0; i<n; i++){
             
-            for(int j=arr[i].dead; j>0; j--){
-                
-                if(slot[j] == -1){
-                    slot[j] = arr[i].id;
-                    cntJob++;
-                    profit += arr[i].profit;
+            int dead = arr[i].dead;
+            while(dead >= 1){
+                if(last[dead] == 0){
+                    last[dead] = 1;
+                    cnt ++;
+                    ans += arr[i].profit;
                     break;
-                }
+                }else dead--;
             }
         }
-        return {cntJob, profit};
+        return { cnt, ans }; 
     } 
 };
 
