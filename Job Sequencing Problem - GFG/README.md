@@ -3,7 +3,7 @@
 <div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a set of <strong>N</strong> jobs where each <strong>job<sub>i</sub></strong>&nbsp;has a deadline and profit associated with it. </span></p>
 <p><span style="font-size: 18px;">Each job takes <strong><em>1</em></strong> unit of time to complete and only one job can be scheduled at a time. We earn the profit associated with job if and only if the job is completed by its deadline. </span></p>
 <p><span style="font-size: 18px;">Find the number of jobs done and the&nbsp;<strong>maximum profit</strong>.</span></p>
-<p><strong><span style="font-size: 18px;">Note: </span></strong><span style="font-size: 18px;">J</span><span style="font-size: 18px;">obs will be given in the form (Job<sub>id</sub>, Deadline,&nbsp;Profit) associated with that Job.</span></p>
+<p><strong><span style="font-size: 18px;">Note: </span></strong><span style="font-size: 18px;">J</span><span style="font-size: 18px;">obs will be given in the form (Job<sub>id</sub>, Deadline, Profit) associated with that Job. Deadline of the job is the time before which job needs to be completed to earn the profit.</span></p>
 <p><br><strong><span style="font-size: 18px;">Example 1:</span></strong></p>
 <pre><strong><span style="font-size: 18px;">Input:
 </span></strong><span style="font-size: 18px;">N = 4
