@@ -26,7 +26,7 @@ public:
         if(i+1 < s.size()){
             if(s[i] != '*' and s[i+1] != '*'){
                 if(isValid(s, i, i+1)) ans = (ans + f(i+2, s, dp)) % mod;
-                if(isValid(s, i, i)) ans = (ans + f(i+1, s, dp)) % mod;
+                if(s[i] != '0') ans = (ans + f(i+1, s, dp)) % mod;
                 
             }else if(s[i] == '*' and s[i+1] == '*'){
                 ans = (ans + (15 * f(i+2, s, dp))) % mod;
@@ -36,11 +36,9 @@ public:
                 int x = 2;
                 if(s[i+1] == '7' || s[i+1] == '8' || s[i+1] == '9') x = 1; 
                 ans = (ans + (x * f(i+2, s, dp))) % mod;
-                // cout<<1<<' ';
                 ans = (ans + (9 * f(i+1, s, dp))) % mod; 
                     
             }else if(s[i] != '*' and s[i+1] == '*'){
-    
                 int x = 0;
                 if(s[i] == '1') x = 9;
                 else if(s[i] == '2') x = 6;
@@ -51,7 +49,7 @@ public:
         }else{
             if(s[i] == '*'){
                 ans = (ans + (9 * f(i+1, s, dp))) % mod;
-            }else if(isValid(s, i, i)){
+            }else if(s[i] != '0'){
                 ans = (ans + f(i+1, s, dp)) % mod;
             }
         }
