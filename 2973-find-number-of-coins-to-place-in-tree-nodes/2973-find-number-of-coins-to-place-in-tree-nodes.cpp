@@ -1,11 +1,12 @@
 #define pq_Min_Max pair<priority_queue<long long, vector<long long>, greater<long long>>, priority_queue<long long>>
+#define pq_Max priority_queue<long long, vector<long long>, greater<long long>>
+#define pq_Min priority_queue<long long>
 
 class Solution {
     vector<long long> ans;
 public:
     
-    long long maxProduct(priority_queue<long long, vector<long long>, greater<long long>> &currMax, 
-                  priority_queue<long long> &currMin){
+    long long maxProduct(pq_Max &currMax, pq_Min &currMin){
         
         vector<long long> arr;
         while(currMax.size()){
@@ -21,9 +22,6 @@ public:
             if(i > 0) currMax.push(i);
             else currMin.push(i);
         }
-        // for(auto i: arr) cout<<i<<' ';
-        // cout<<'\n';
-        
         int n = arr.size();
         long long ans = 0;
         for(int i=0; i<n-2; i++){
@@ -35,8 +33,8 @@ public:
     pq_Min_Max f(int src, vector<int> &vis, vector<int> adj[], vector<int> &cost){
         
         vis[src] = 1;
-        priority_queue<long long, vector<long long>, greater<long long>> currMax;
-        priority_queue<long long> currMin;
+        pq_Max currMax;
+        pq_Min currMin;
         if(cost[src] > 0) currMax.push(cost[src]);
         else currMin.push(cost[src]);
         
