@@ -3,8 +3,8 @@ public:
     int maximumSetSize(vector<int>& nums1, vector<int>& nums2) {
         
         int n = nums1.size();
-        map<int,int> mp1;
-        map<int,int> mp2;
+        unordered_map<int,int> mp1;
+        unordered_map<int,int> mp2;
         
         for(auto &i: nums1) mp1[i]++;
         for(auto &i: nums2) mp2[i]++;
@@ -21,7 +21,7 @@ public:
             i.second = 1;
         }
         
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         for(auto i: mp1){
             if(i.second) mp[i.first]++;
         }
