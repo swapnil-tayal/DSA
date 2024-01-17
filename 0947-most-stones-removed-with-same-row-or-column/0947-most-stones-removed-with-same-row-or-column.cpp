@@ -62,7 +62,7 @@ public:
         }
         // cout<<n<<' '<<m<<'\n';
         DisjoinSet *dj = new DisjoinSet(n+m+2); 
-        map<int,int> mp;
+        map<int,int> mp, mp2;
         
         for(auto &i: stones){
             
@@ -72,14 +72,11 @@ public:
             mp[row] = 1;
             mp[col] = 1;
         }
-        int cnt = 0;
-        for(auto i: mp){            
-            if(dj->findParent(i.first) == i.first){
-                // cout<<i.first<<" ";
-                cnt++;
-            }
+        set<int> st;
+        for(auto i: mp){
+            st.insert(dj->findParent(i.first));
         }
-        return stones.size()-cnt;
+        return stones.size() - st.size();
     }
 };
 
