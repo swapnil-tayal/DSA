@@ -13,32 +13,19 @@ class Solution{
     int ans = 0;
 public:
     
-    void f(TreeNode* root, TreeNode* par){
+    int f(TreeNode* root){
         
-        if(!root) return;
+        if(!root) return 0;
         
-        f(root->left, root);
-        f(root->right, root);
-        
-        if(root->val >= 1){
-            
-            int coins = abs(1 - root->val);
-            root->val = 1;
-            ans += coins;
-            par->val += coins;
-            
-        }else{
-            
-            int coins = abs(1 - root->val);
-            root->val = 1;
-            ans += coins;
-            par->val -= coins;
-        }
+        int left = f(root->left);
+        int right = f(root->right);
+        ans += abs(left) + abs(right);
+        return root->val + left + right - 1;
     }
     
     int distributeCoins(TreeNode* root) {
         
-        f(root, root);
+        f(root);
         return ans;
     }
 };
