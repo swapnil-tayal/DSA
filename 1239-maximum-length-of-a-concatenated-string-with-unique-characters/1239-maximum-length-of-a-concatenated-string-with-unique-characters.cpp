@@ -1,22 +1,35 @@
 class Solution {
 public:
     
-    int solve(vector<string> &arr, int n, string temp){
+    void f(int i, vector<string> &arr, vector<int> &freq, int &ans){
         
-        set<int> st;
-        for(auto i: temp){
-            if(st.count(i)) return -1;
-            st.insert(i);
+        if(i == arr.size()){
+            
+            int cnt = 0;
+            for(auto &k: freq){
+                if(k > 1) return;
+                else cnt += k;
+            }
+            ans = max(ans, cnt);
+            return;
         }
-        if(n == -1) return st.size();
         
-        int pick = solve(arr, n-1, temp+arr[n]);
-        int npick = solve(arr, n-1, temp);
-        return max(pick, npick);
+        for(auto &k: arr[i]){
+            freq[k-'a']++;
+        }
+        f(i+1, arr, freq, ans);
+        for(auto &k: arr[i]){
+            freq[k-'a']--;
+        }
+        f(i+1, arr, freq, ans);
+        return;
     }
     
     int maxLength(vector<string>& arr) {
-        int n = arr.size();
-        return solve(arr, n-1, "");
+        
+        vector<int> freq(26, 0);
+        int ans = 0;
+        f(0, arr, freq, ans);
+        return ans;
     }
 };
