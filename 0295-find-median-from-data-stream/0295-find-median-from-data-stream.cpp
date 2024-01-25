@@ -1,37 +1,36 @@
-class MedianFinder{
+class MedianFinder {
     
-    priority_queue<int, vector<int>, greater<int>> minPq;
-    priority_queue<int> maxPq;
-    int cnt;
+    priority_queue<int> maxQ;
+    priority_queue<int, vector<int>, greater<int>> minQ;
 public:
     MedianFinder() {
-        this->cnt = 0;
+        
     }
     
     void addNum(int num) {
         
-        if(maxPq.empty() || num < maxPq.top()) maxPq.push(num);
-        else minPq.push(num);
+        if(maxQ.size() == 0 || maxQ.top() > num) maxQ.push(num);
+        else minQ.push(num);
         
-        if(minPq.size() > maxPq.size() + 1){
-            maxPq.push(minPq.top());
-            minPq.pop();
+        if(maxQ.size() + 1 < minQ.size()){
+            maxQ.push(minQ.top());
+            minQ.pop();
         }
-        else if(maxPq.size() > minPq.size() + 1){
-            minPq.push(maxPq.top());
-            maxPq.pop();
+        if(minQ.size() + 1 < maxQ.size()){
+            minQ.push(maxQ.top());
+            maxQ.pop();
         }
     }
     
     double findMedian() {
         
-        if((minPq.size() == maxPq.size())){
-            
-            double x = minPq.top() + maxPq.top();
-            return x/2.0;
-            
+        if((maxQ.size() + minQ.size()) % 2 == 0){    
+            return ((double)minQ.top() + (double)maxQ.top()) / 2.0;
+        
         }else{
-            return minPq.size() > maxPq.size() ? minPq.top() : maxPq.top();
+            
+            if(maxQ.size() > minQ.size()) return maxQ.top();
+            else return minQ.top();
         }
     }
 };
