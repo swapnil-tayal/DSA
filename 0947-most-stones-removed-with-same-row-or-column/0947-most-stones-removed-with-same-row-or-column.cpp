@@ -1,10 +1,10 @@
 class DSU{
-    vector<int> size;
     vector<int> parent;
+    vector<int> size;
     public:
     DSU(int n){
-        size.resize(n+1, 0);
         parent.resize(n+1, 0);
+        size.resize(n+1, 0);
         for(int i=0; i<=n; i++){
             parent[i] = i;
         }
@@ -14,15 +14,15 @@ class DSU{
         return parent[n] = findParent(parent[n]);
     }
     void unionBySize(int x, int y){
-        int u = findParent(x);
-        int v = findParent(y);
+        int v = findParent(x);
+        int u = findParent(y);
         if(u == v) return;
-        if(size[u] > size[v]){
-            parent[v] = u;
-            size[u] += size[v];
-        }else{
+        if(size[v] > size[u]){
             parent[u] = v;
             size[v] += size[u];
+        }else{
+            parent[v] = u;
+            size[u] += size[v];
         }
     }
 };
