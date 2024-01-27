@@ -7,7 +7,7 @@ public:
         if(dp[i][k] != -1) return dp[i][k];
         int rem = n-i;
         
-        if(k > (rem+1)*(rem)/2) return 0;
+        // if(k > (rem+1)*(rem)/2) return 0;
         
         int ans = f(i+1, n, k, dp);
         for(int j=1; j<=rem; j++){
