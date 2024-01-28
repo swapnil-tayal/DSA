@@ -1,35 +1,41 @@
 class Solution {
 public:
+    
+    int subarraySum(vector<int>& nums, int k) {
+        
+        map<int,int> mp;
+        int n = nums.size();
+        int sum = 0;
+        mp[0] = 1;
+        int cnt = 0;
+        
+        for(int i=0; i<n; i++){
+            
+            sum += nums[i];
+            if(mp.find(sum - k) != mp.end()){
+                cnt += mp[sum-k];
+            }
+            mp[sum]++;
+        }
+        return cnt;
+    }
+    
     int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target) {
         
         int n = matrix.size();
         int m = matrix[0].size();
-        vector<vector<int>> pre(n, vector<int>(m, 0));
         
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                
-                int sum = 0;
-                if(i-1 >= 0) sum += pre[i-1][j];
-                if(j-1 >= 0) sum += pre[i][j-1];
-                if(i-1 >= 0 and j-1 >= 0) sum -= pre[i-1][j-1];
-                pre[i][j] = sum + matrix[i][j];
-            }
-        }
         int cnt = 0;
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                
-                for(int x=i; x<n; x++){
-                    for(int y=j; y<m; y++){
-                        
-                        int sum = pre[x][y];
-                        if(i-1 >= 0) sum -= pre[i-1][y];
-                        if(j-1 >= 0) sum -= pre[x][j-1];
-                        if(i-1 >= 0 and j-1 >= 0) sum += pre[i-1][j-1];
-                        cnt += sum == target;
-                    }
+        
+        for(int k=0; k<n; k++){
+            
+            vector<int> arr(m, 0);
+            
+            for(int i=k; i<n; i++){
+                for(int j=0; j<m; j++){
+                    arr[j] += matrix[i][j];
                 }
+                cnt += subarraySum(arr, target);
             }
         }
         return cnt;
