@@ -9,20 +9,20 @@ public:
         input.push(x);
     }
     
-    int pop(){
+    int pop() {
         int x = peek();
         output.pop();
         return x;
     }
     
-    int peek(){
-        
+    int peek() {
         if(output.size() == 0){
             while(input.size()){
                 output.push(input.top());
                 input.pop();
             }
-        }return output.top();
+        }
+        return output.top();
     }
     
     bool empty() {
