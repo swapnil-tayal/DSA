@@ -1,27 +1,21 @@
+bool cmp(vector<int> &a, vector<int> &b){
+    return a[1] < b[1];
+}
 class Solution {
-    
-    vector<int> str;
 public:
-    
-    int f(int i, vector<vector<int>> &pairs, vector<int> &dp){
+    int findLongestChain(vector<vector<int>>& points) {
+        sort(points.begin(), points.end(), cmp);
+        int n = points.size();
         
-        if(i >= pairs.size()) return 0;
-        if(dp[i] != -1) return dp[i];
-        
-        int npick = f(i+1, pairs, dp);
-        
-        int ind = upper_bound(str.begin(), str.end(), pairs[i][1]) - str.begin();
-        int pick = 1 + f(ind, pairs, dp);
-        return dp[i] = max(pick, npick);
-    }
-    
-    int findLongestChain(vector<vector<int>>& pairs) {
-        
-        int n = pairs.size();
-        sort(pairs.begin(), pairs.end());
-        for(auto i: pairs) str.push_back(i[0]);
-        vector<int> dp(n, -1);
-        return f(0, pairs, dp);
+        int curr = points[0][1];
+        int cnt = 1;
+        for(int i=0; i<n; i++){
+            if(points[i][0] > curr){
+                curr = points[i][1];
+                cnt++;
+            }
+        }
+        return cnt;
         
     }
 };
