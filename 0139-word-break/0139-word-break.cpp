@@ -1,27 +1,68 @@
-class Solution{
-    set<string> st;
+struct Node{
+    Node* links[26];
+    bool flag = false;
+    bool containsKey(char ch){
+        return links[ch-'a'] != NULL;
+    }
+    void put(char ch, Node* node){
+        links[ch-'a'] = node;
+        return;
+    }
+    Node* get(char ch){
+        return links[ch-'a'];
+    }
+    void setEnd(){
+        flag = true;
+    }
+    bool isEnd(){
+        return flag;
+    }
+};
+
+class Trie {
+    Node* root;
 public:
-    
-    int ch(int i, int j, string &str){
-        string temp = "";
-        for(int k=i; k<=j; k++) temp += str[k];
-        return st.count(temp);
+    Trie() {
+        root = new Node();
     }
     
-    int f(int i, int prev, string &str, vector<vector<int>> &dp){
+    void insert(string word) {
+        Node* node = root;
+        for(int i=0; i<word.size(); i++){
+            if(!node->containsKey(word[i])){
+                node->put(word[i], new Node());
+            }
+            node = node->get(word[i]);
+        }
+        node->setEnd();
+    }    
+    bool checkIfMadeArrayWords(int ind, string &word, vector<int> &dp){
         
-        if(i == str.size()) return prev == str.size();
-        if(dp[i][prev] != -1) return dp[i][prev];
-        int npick = f(i+1, prev, str, dp);
-        int pick = 0;
-        if(ch(prev, i, str)) pick = f(i+1, i+1, str, dp);
-        return dp[i][prev] = npick or pick;
+        if(ind == word.size()) return true;
+        if(dp[ind] != -1) return dp[ind];
+        
+        Node* node = root;
+        for(int i=ind; i<word.size(); i++){
+            
+            if(node->containsKey(word[i])){
+                node = node->get(word[i]);
+                if(node->isEnd()){
+                    if(checkIfMadeArrayWords(i+1, word, dp)) return dp[ind] = true;
+                }
+            }else return dp[ind] = false;
+        }
+        return dp[ind] = false;
     }
-    
+};
+
+
+class Solution {
+public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        int n = s.size();
-        for(auto i: wordDict) st.insert(i);
-        vector<vector<int>> dp(n, vector<int>(n, -1));
-        return f(0, 0, s, dp);
+        
+        Trie *trie = new Trie();
+        for(auto &i: wordDict) trie->insert(i);
+        vector<int> dp(s.size(), -1);
+        return trie->checkIfMadeArrayWords(0, s, dp);
     }
 };
