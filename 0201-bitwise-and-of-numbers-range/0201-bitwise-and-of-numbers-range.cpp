@@ -2,8 +2,6 @@ class Solution {
 public:
     int rangeBitwiseAnd(int left, int right) {
         
-        if(left == right) return left;
-        
         bitset<32> it1(left);
         bitset<32> it2(right);
         
