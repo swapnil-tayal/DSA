@@ -1,8 +1,13 @@
+bool cmp(vector<int> &a1, vector<int> &a2){
+    return a1[2] <= a2[2];
+}
+
 class Solution{
 public:
     vector<int> findAllPeople(int n, vector<vector<int>>& meetings, int firstPerson) {
         
         int m = meetings.size();
+        // sort(meetings.begin(), meetings.end());
         vector<pair<int,int>> adj[n];
         
         for(int i=0; i<m; i++){    
