@@ -18,9 +18,6 @@ public:
         if(!root) return 0;
         int left = f(root->left);
         int right = f(root->right);
-        if(root->val == 1){
-            // cout<<left<<' '<<right<<'\n';
-        }
         ans = max(ans, left+right);
         return max(left, right) + 1;
     }
