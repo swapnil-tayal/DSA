@@ -2,48 +2,49 @@
 #include <ext/pb_ds/assoc_container.hpp> 
 #include <ext/pb_ds/tree_policy.hpp> 
 using namespace __gnu_pbds; 
-using ordered_set = tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>;
+using ordered_set = tree<int, null_type,less_equal<int>, rb_tree_tag,tree_order_statistics_node_update>;
 
 
 class Solution {
 public:
     vector<int> resultArray(vector<int>& nums){
 
-        vector<int> arr1, arr2, num1, num2;
+        ordered_set st1;
+        ordered_set st2;
+        vector<int> arr1, arr2;
         
+        st1.insert(nums[0]);
+        st2.insert(nums[1]);
         arr1.push_back(nums[0]);
         arr2.push_back(nums[1]);
-        num1.push_back(nums[0]);
-        num2.push_back(nums[1]);
-        
         
         for(int i=2; i<nums.size(); i++){
             
-            int ind1 = (upper_bound(arr1.begin(), arr1.end(), nums[i]) - arr1.begin());
-            int ind2 = (upper_bound(arr2.begin(), arr2.end(), nums[i]) - arr2.begin());
-        
-            if(arr1.size() - ind1 > arr2.size() - ind2){
-                arr1.insert(arr1.begin() + ind1, nums[i]);
-                num1.push_back(nums[i]);
-                
-            }else if(arr1.size() - ind1 < arr2.size() - ind2){
-                arr2.insert(arr2.begin() + ind2, nums[i]);
-                num2.push_back(nums[i]);
-                
-            }else{
-                if(arr2.size() < arr1.size()){
-                    arr2.insert(arr2.begin() + ind2, nums[i]);
-                    num2.push_back(nums[i]);
+            int x1 = st1.size() - st1.order_of_key(nums[i]+1);
+            int x2 = st2.size() - st2.order_of_key(nums[i]+1);
+            
+            if(x1 > x2){
+                st1.insert(nums[i]);
+                arr1.push_back(nums[i]);
+            }
+            else if(x2 > x1){
+                st2.insert(nums[i]);
+                arr2.push_back(nums[i]);
+            }
+            else{
+                if(st2.size() < st1.size()){
+                    arr2.push_back(nums[i]);
+                    st2.insert(nums[i]);
                 }
                 else{
-                    arr1.insert(arr1.begin() + ind1, nums[i]);
-                    num1.push_back(nums[i]);
+                    arr1.push_back(nums[i]);
+                    st1.insert(nums[i]);
                 }
             }
         }
         vector<int> ans;
-        for(auto i: num1) ans.push_back(i);
-        for(auto i: num2) ans.push_back(i);
+        for(auto i: arr1) ans.push_back(i);
+        for(auto i: arr2) ans.push_back(i);
         return ans;
     }
 };
