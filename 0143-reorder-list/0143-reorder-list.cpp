@@ -10,27 +10,35 @@
  */
 class Solution {
 public:
-    
-    ListNode* rev(ListNode* head){
-        
-        ListNode* prev = NULL;
-        ListNode* curr = head;
-        ListNode* next;
-        while(curr){
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
-    }
-    
     void reorderList(ListNode* head) {
         
+        if(!head)return;
+        
+        vector<int> arr;
+        
         ListNode* temp = head;
-        while(temp->next){
-            temp->next = rev(temp->next);
+        
+        while(temp){
+            arr.push_back(temp->val);
             temp = temp->next;
         }
+        
+        
+        temp = head;
+        int i = 0;
+        int count = 0;
+        int n = arr.size();
+        
+        while(temp){
+            
+            if(count % 2 == 0){
+                temp->val = arr[i];
+            }else{
+                temp->val = arr[n-i-1];
+                i++;
+            }
+            count++;
+            temp = temp->next;   
+        }      
     }
 };
