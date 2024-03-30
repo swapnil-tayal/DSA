@@ -12,13 +12,19 @@ public:
         while(j < n){
             
             mp[nums[j]]++;
-            while(mp.size() > k){
-                mp[nums[i]]--;
-                if(mp[nums[i]] == 0) mp.erase(nums[i]);
-                i++;
+            if(mp.size() <= k){
+                cnt += (j-i+1);
+                j++;
+            }else{
+                
+                while(i < n and mp.size() > k){
+                    mp[nums[i]]--;
+                    if(mp[nums[i]] == 0) mp.erase(nums[i]);
+                    i++;
+                }
+                if(mp.size() <= k) cnt += (j-i+1);
+                j++;
             }
-            if(mp.size() <= k) cnt += j-i+1;
-            j++;
         }
         return cnt;
     }
