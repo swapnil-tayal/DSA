@@ -12,8 +12,13 @@
 class Solution {
 public:
     
-    TreeNode* f(TreeNode* node, int val, int depth){
+    TreeNode* addOneRow(TreeNode* node, int val, int depth) {
         
+        if(depth == 1){
+            TreeNode* newNode = new TreeNode(val);
+            newNode->left = node;
+            return newNode;
+        }
         if(!node) return NULL;
         
         if(depth == 2){
@@ -28,19 +33,9 @@ public:
             return node;
         }
         TreeNode* root = new TreeNode(node->val);
-        root->left = f(node->left, val, depth-1);
-        root->right = f(node->right, val, depth-1);
+        root->left = addOneRow(node->left, val, depth-1);
+        root->right = addOneRow(node->right, val, depth-1);
         
         return root;
-    }
-    
-    TreeNode* addOneRow(TreeNode* root, int val, int depth) {
-        
-        if(depth == 1){
-            TreeNode* newNode = new TreeNode(val);
-            newNode->left = root;
-            return newNode;
-        }
-        return f(root, val, depth);
     }
 };
