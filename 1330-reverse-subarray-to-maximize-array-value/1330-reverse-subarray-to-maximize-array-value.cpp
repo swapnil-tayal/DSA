@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/reverse-subarray-to-maximize-array-value/discuss/489929/O(n)-time-O(1)-space.-In-depth-Explanation.
+
 class Solution{
     int n;
     int S;
