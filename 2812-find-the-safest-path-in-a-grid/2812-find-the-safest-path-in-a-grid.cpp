@@ -50,7 +50,8 @@ class Solution {
         int col[] = {0,1,0,-1};
         
         priority_queue<vector<int>> q;
-        if(grid[0][0] > 0) q.push({ grid[0][0], 0, 0 });
+        // if(grid[0][0] > 0) 
+            q.push({ grid[0][0], 0, 0 });
         int n = grid.size();
         
         vector<vector<int>> vis(n, vector<int>(n, 0));        
@@ -74,7 +75,7 @@ class Solution {
                 int newj = j + col[k];
                 
                 if(newi >= 0 and newj >= 0 and newi < n and newj < n
-                   and vis[newi][newj] == 0 and grid[newi][newj] > 0){ 
+                   and vis[newi][newj] == 0){ 
                     
                     vis[newi][newj] = 1;
                     q.push({ grid[newi][newj], newi, newj });
