@@ -1,11 +1,23 @@
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        map<int, int> mp;
-        for(auto i: nums) mp[i]++;
+        
+        int num = 0;
+        for(auto &i: nums){
+            num ^= i;
+        }
+        
+        map<int,int> mp;
+        for(auto &i: nums){
+            
+            int a = i;
+            int b = num ^ a;
+            mp[b]++;
+        }
         vector<int> ans;
-        for(auto [i, j]: mp){
-            if(j == 1) ans.push_back(i);
-        }return ans; 
+        for(auto i: mp){
+            if(i.second == 1) ans.push_back(i.first); 
+        }
+        return ans;
     }
 };
