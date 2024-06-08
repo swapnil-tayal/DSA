@@ -13,7 +13,7 @@ public:
             
             sum += nums[i];
             if(!mp.count(sum % k)) mp[sum % k] = i+1;
-            else if(mp[sum % k] < i) return 1;
+            else if(i - mp[sum % k] >= 1) return 1;
         }
         return 0;
     }
