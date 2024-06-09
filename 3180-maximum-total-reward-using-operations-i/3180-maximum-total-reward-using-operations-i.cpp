@@ -22,7 +22,7 @@ public:
         
         int n = arr.size();
         sort(arr.begin(), arr.end());
-        vector<vector<int>> dp(n, vector<int>(8000, 0));
+        vector<vector<int>> dp(n, vector<int>(4001, 0));
         int sum = 0;
         f(0, arr, sum, dp);
         return ans;
