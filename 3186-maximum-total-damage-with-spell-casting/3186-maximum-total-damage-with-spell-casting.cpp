@@ -4,18 +4,6 @@ class Solution {
     int n;
 public:
     
-    long long f(int i, vector<int> &power, vector<long long> &dp){
-        
-        if(i == power.size()) return 0;
-        if(dp[i] != -1) return dp[i];
-        
-        long long npick = 0;
-        long long pick = 0;
-        
-        npick = f(i+1, power, dp);
-        pick = (mp[power[i]] * power[i]) + f(mp2[i], power, dp);
-        return dp[i] = max(npick, pick);
-    }
     
     long long maximumTotalDamage(vector<int>& power) {
         
