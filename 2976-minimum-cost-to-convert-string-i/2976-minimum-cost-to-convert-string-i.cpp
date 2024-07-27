@@ -15,7 +15,7 @@ public:
         return ;
     }
     long long minimumCost(string source, string target, vector<char>& original, vector<char>& changed, vector<int>& cost) {
-        vector<vector<long long>> vec(26,vector<long long>(26,1e11));
+        vector<vector<long long>> vec(26,vector<long long>(26,1e15));
         vector<vector<long long>> adj;
         for(int i=0;i<original.size();i++){
             int a = original[i]-'a';
@@ -37,6 +37,6 @@ public:
             if(adj[a][b]>=1e18) return -1;
             ans +=adj[a][b];
         }
-        return ans >= 1e11 ? -1 : ans ;
+        return ans >= 1e15 ? -1 : ans ;
     }
 };
