@@ -13,7 +13,7 @@ public:
             for(int k=0; k<=val; k++) cnt = (cnt + f(i+1, k, nums, dp)) % (int)(1e9+7);
         
         }else{
-            for(int k=val-nums[i]+prev; k<=val; k++){
+            for(int k=val-nums[i-1]+prev; k<=val; k++){
                 if(k >= prev and val-k <= nums[i-1]-prev){
                     cnt = (cnt + f(i+1, k, nums, dp)) % (int)(1e9+7);
                 }
