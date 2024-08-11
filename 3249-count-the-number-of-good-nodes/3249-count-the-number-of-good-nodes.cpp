@@ -12,12 +12,11 @@ public:
             
             if(vis[i]) continue;
             int child = f(i, vis, adj);
-            st.insert(child);
+            if(st.size() < 2) st.insert(child);
             size += child;
         }
         
         if(st.size() <= 1){
-            // cout<<src<<' ';
             cnt++;
         }
         return size+1;
