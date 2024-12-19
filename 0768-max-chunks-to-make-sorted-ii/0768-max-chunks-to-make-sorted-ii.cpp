@@ -6,7 +6,7 @@ public:
         vector<int> a(arr.begin(), arr.end());
         sort(a.begin(), a.end());
     
-        map<int, set<int>> mp;
+        unordered_map<int, set<int>> mp;
         for(int i=0; i<n; i++){
             mp[arr[i]].insert(i);
         }
