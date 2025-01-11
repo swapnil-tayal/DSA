@@ -3,7 +3,7 @@ public:
     bool canConstruct(string s, int k) {
         
         int n = s.size();
-        map<char,int> mp;
+        unordered_map<char,int> mp;
 
         for(auto &i: s) mp[i]++;
         int cnt = 0;
