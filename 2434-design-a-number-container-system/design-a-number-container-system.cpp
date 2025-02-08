@@ -1,5 +1,5 @@
 class NumberContainers {
-    map<int,set<int>> mp;
+    unordered_map<int,set<int>> mp;
     unordered_map<int,int> mp2;
 public:
     NumberContainers() {
