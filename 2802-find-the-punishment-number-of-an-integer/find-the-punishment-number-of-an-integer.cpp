@@ -1,8 +1,16 @@
 class Solution {
+    vector<int> check;
 public:
 
-    int f(int i, string num, int tar, int sum){
+    Solution(){
+        for(int i=0; i<=1000; i++){
+            if(f(0, to_string(i*i), i, 0)){
+                check.push_back(1);
+            }else check.push_back(0);
+        }
+    }
 
+    int f(int i, string num, int tar, int sum){
         if(i == num.size()){
             if(sum == tar) return 1;
             else return 0;
@@ -20,9 +28,7 @@ public:
         
         int sum = 0;
         for(int i=1; i<=n; i++){
-            if(f(0, to_string(i*i), i, 0)){
-                sum += (i*i);
-            }
+            if(check[i]) sum += (i*i); 
         }
         return sum;
     }
