@@ -1,12 +1,13 @@
 class Solution {
 public:
 
-    void f(int src, vector<int> &vis, vector<int> adj[], vector<int> &arr){
-        arr.push_back(src);
+    void f(int src, vector<int> &vis, vector<int> adj[], int &cnt, int &edges){
+        cnt++;
         vis[src] = 1;
         for(auto &i: adj[src]){
+            edges++;
             if(vis[i] == 1) continue;
-            f(i, vis, adj, arr);
+            f(i, vis, adj, cnt, edges);
         }
         return;
     }
@@ -29,17 +30,10 @@ public:
 
         for(int i=0; i<n; i++){
             if(vis[i] == 1) continue;                
-            vector<int> arr;
-            f(i, vis, adj, arr);
-            int f = 0;
-            for(int k=0; k<arr.size(); k++){
-                for(int j=k+1; j<arr.size(); j++){
-                    if(st.count({arr[j], arr[k]}) == 0 and st.count({arr[k], arr[j]}) == 0){
-                        f = 1;  
-                    }
-                }
-            }
-            if(!f) cnt++;
+            int ver = 0;
+            int edges = 0;
+            f(i, vis, adj, ver, edges);
+            cnt += ((ver*(ver-1)/2) == (edges/2));
         }
         return cnt;
     }
