@@ -15,10 +15,14 @@ public:
             mp1[sm]++;
         }
         int maxi = 0;
-        for(auto &i: mp1) maxi = max(maxi, i.second);
         int cnt = 0;
-        for(auto i: mp1){
-            if(i.second == maxi) cnt++;  
+        for(auto &i: mp1){
+            if(i.second > maxi){
+                maxi = i.second;
+                cnt = 1;
+            }else if(i.second == maxi){
+                cnt++;
+            }
         }
         return cnt;
     }
