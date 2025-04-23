@@ -4,6 +4,8 @@ public:
         
         map<int,int> mp1;
         map<int,int> mp2;
+        int maxi = 0;
+        int cnt = 0;
         for(int i=1; i<=n; i++){
             int sm = 0;
             int x = i;
@@ -11,16 +13,12 @@ public:
                 sm += x%10;
                 x = x/10;
             }
-            // cout<<i<<' '<<sm<<'\n';
             mp1[sm]++;
-        }
-        int maxi = 0;
-        int cnt = 0;
-        for(auto &i: mp1){
-            if(i.second > maxi){
-                maxi = i.second;
+            int val = mp1[sm];
+            if(val > maxi){
+                maxi = val;
                 cnt = 1;
-            }else if(i.second == maxi){
+            }else if(val == maxi){
                 cnt++;
             }
         }
