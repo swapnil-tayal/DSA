@@ -18,8 +18,8 @@ public:
             swap(sum1, sum2);
             swap(z1, z2);
         }
-        cout<<sum1<<' '<<z1<<'\n';
-        cout<<sum2<<' '<<z2<<'\n';
+        // cout<<sum1<<' '<<z1<<'\n';
+        // cout<<sum2<<' '<<z2<<'\n';
         if(sum1 == sum2){
             if(z1 == 0 && z2 == 0) return sum1;
             if(z1 == 0 || z2 == 0) return -1;
