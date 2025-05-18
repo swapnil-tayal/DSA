@@ -1,8 +1,9 @@
 class Solution {
     vector<vector<int>> res;
     set<vector<int>> st;
+    int mod = 1000000007;
 public:
-    void f(int i, int prev, int m, vector<int>& a) {
+    void generateAllPossibleColumns(int i, int prev, int m, vector<int>& a) {
         if (i == m) {
             st.insert(a);
             return;
@@ -11,7 +12,7 @@ public:
             if (prev != -1 && v == prev) 
                 continue;
             a.push_back(v);
-            f(i+1, v, m, a);
+            generateAllPossibleColumns(i+1, v, m, a);
             a.pop_back();
         }
     }
@@ -25,7 +26,7 @@ public:
 
     void helper(int m){
         vector<int> a;
-        f(0, -1, m, a);
+        generateAllPossibleColumns(0, -1, m, a);
         vector<vector<int>> arr(st.begin(), st.end());
         int n = arr.size();
         res.resize(n, vector<int>());
@@ -36,7 +37,6 @@ public:
                 }
             }
         }
-        int ind = 0;
     }
 
     int f(int i, int prev, int n, vector<vector<int>> &dp){
@@ -46,11 +46,11 @@ public:
         if(dp[i][prev+1] != -1) return dp[i][prev+1];
         if(prev == -1){
             for(int k=0; k<res.size(); k++){
-                ans = (ans + f(i+1, k, n, dp)) % 1000000007;
+                ans = (ans + f(i+1, k, n, dp)) % mod;
             }
         }else{
             for(int k=0; k<res[prev].size(); k++){
-                ans = (ans + f(i+1, res[prev][k], n, dp)) % (1000000007);
+                ans = (ans + f(i+1, res[prev][k], n, dp)) % mod;
             }
         }
         return dp[i][prev+1] = ans;
