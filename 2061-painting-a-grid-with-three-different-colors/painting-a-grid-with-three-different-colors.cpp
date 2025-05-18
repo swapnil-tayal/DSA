@@ -2,41 +2,16 @@ class Solution {
     vector<vector<int>> res;
     set<vector<int>> st;
 public:
-    void f(int i, int prev, int m, vector<int> &a){
-        if(i == m){
+    void f(int i, int prev, int m, vector<int>& a) {
+        if (i == m) {
             st.insert(a);
             return;
-        }   
-        if(prev == -1){
-            a.push_back(0);
-            f(i+1, 0, m, a);
-            a.pop_back();
-            a.push_back(1);
-            f(i+1, 1, m, a);
-            a.pop_back();
-            a.push_back(2);
-            f(i+1, 2, m, a);
-            a.pop_back();
-        }if(prev == 0){
-            a.push_back(1);
-            f(i+1, 1, m, a);
-            a.pop_back();
-            a.push_back(2);
-            f(i+1, 2, m, a);
-            a.pop_back();
-        }else if(prev == 1){
-            a.push_back(0);
-            f(i+1, 0, m, a);
-            a.pop_back();
-            a.push_back(2);
-            f(i+1, 2, m, a);
-            a.pop_back();
-        }else{
-            a.push_back(0);
-            f(i+1, 0, m, a);
-            a.pop_back();
-            a.push_back(1);
-            f(i+1, 1, m, a);
+        }
+        for (int v = 0; v < 3; ++v) {
+            if (prev != -1 && v == prev) 
+                continue;
+            a.push_back(v);
+            f(i+1, v, m, a);
             a.pop_back();
         }
     }
@@ -51,10 +26,6 @@ public:
     void helper(int m){
         vector<int> a;
         f(0, -1, m, a);
-        // for(auto i: st){
-        //     for(auto j: i) cout<<j<<' ';
-        //     cout<<'\n';
-        // }
         vector<vector<int>> arr(st.begin(), st.end());
         int n = arr.size();
         res.resize(n, vector<int>());
@@ -66,11 +37,6 @@ public:
             }
         }
         int ind = 0;
-        // for(auto i: res){
-        //     cout<<ind++<<'-';
-        //     for(auto j: i) cout<<j<<' ';
-        //     cout<<'\n';
-        // }
     }
 
     int f(int i, int prev, int n, vector<vector<int>> &dp){
