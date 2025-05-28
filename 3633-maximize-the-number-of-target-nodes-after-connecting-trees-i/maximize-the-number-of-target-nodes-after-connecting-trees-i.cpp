@@ -15,22 +15,15 @@ public:
         
         int m = edges2.size() + 1;
         int n = edges1.size() + 1;
-        vector<int> inD(m);
         vector<vector<int>> adj2(m);
         vector<vector<int>> adj1(n);
         for(auto i: edges2){
             adj2[i[0]].push_back(i[1]);
             adj2[i[1]].push_back(i[0]);
-            inD[i[0]]++;
-            inD[i[1]]++;
         }
         for(auto i: edges1){
             adj1[i[0]].push_back(i[1]);
             adj1[i[1]].push_back(i[0]);
-        }
-        int maxid = 0;
-        for(int i=0; i<m; i++){
-            if(inD[maxid] < inD[i]) maxid = i;
         }
         int maxCnt = 0;
         for(int i=0; i<m; i++){
