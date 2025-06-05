@@ -43,11 +43,6 @@ public:
             int par = dj->findUPar(i);
             mp[par+'a'].insert(char(i+'a'));
         }
-        // for(auto i: mp){
-        //     cout<<i.first<<'-';
-        //     for(auto k: i.second) cout<<k<<' ';
-        //     cout<<'\n';
-        // }
         string str = "";
         for(int i=0; i<baseStr.size(); i++){
             str += *mp[char(dj->findUPar(baseStr[i]-'a') + 'a')].begin();
