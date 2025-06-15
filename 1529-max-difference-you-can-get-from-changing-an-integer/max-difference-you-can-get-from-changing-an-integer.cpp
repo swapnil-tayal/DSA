@@ -1,36 +1,33 @@
 class Solution {
 public:
 
-    int f(string str, char from, int to){
-        int orignalSize = str.size();
-        for(auto &i: str){
-            if(i == from) i = to;
-        }
-        if(orignalSize == to_string(stoi(str)).size() and str != "0"){
-            return stoi(str);
-        }
-        else return -1;
-    }
-
     int maxDiff(int num) {
         
-        string str = to_string(num);
-        int n = str.size();
-
-        set<int> st;
-        for(char i='0'; i<='9'; i++){
-            for(int j='0'; j<='9'; j++){
-                int val = f(str, i, j);
-                if(val != -1) st.insert(val);
+        string s = to_string(num);
+        char dig1 = '-';
+        char dig2 = '-';
+        for(int i=0; i<s.size(); i++){
+            if(s[i] != '9' and dig1 == '-'){
+                dig1 = s[i];
+            }
+            if(s[i] != '1' && s[i] != '0' and dig2 == '-'){
+                dig2 = s[i];
             }
         }
-        int ans = -1e9;
-        vector<int> nums(st.begin(), st.end());
-        for(int i=0; i<nums.size(); i++){
-            for(int j=i+1; j<nums.size(); j++){
-                ans = max(ans, abs(nums[i]-nums[j]));
-            }
+        string s1, s2;
+        for(auto i: s){
+            if(i == dig1) s1 += '9';
+            else s1 += i;
         }
-        return ans;
+        for(auto i: s){
+            if(i == dig2){
+                if(s[0] == dig2) s2 += '1';
+                else s2 += '0';
+            }
+            else s2 += i;
+        }
+        // cout<<s2<<'\n';
+        return stoi(s1) - stoi(s2);
+        
     }
 };
