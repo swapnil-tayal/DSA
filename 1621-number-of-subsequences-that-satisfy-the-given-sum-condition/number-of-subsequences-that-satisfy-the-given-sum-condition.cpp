@@ -16,18 +16,10 @@ public:
         int ans  = 0;
 
         for(int i=0; i<n; i++){
-
             int x = target - nums[i];
-            if(x < nums[i]) break;
-
+            if(x < nums[i]) continue;
             int ind = upper_bound(nums.begin(), nums.end(), x) - nums.begin();
-            ind--;
-            // int h = nums[ind];
-            // while(ind < n and nums[ind] == h){
-            //     ind++;
-            // }
-            // ind--;
-            ans = (ans + pow[ind-i]) % mod;
+            ans = (ans + pow[ind-1-i]) % mod;
         }
         return ans;
     }
