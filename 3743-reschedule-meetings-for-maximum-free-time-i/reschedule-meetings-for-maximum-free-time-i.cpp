@@ -9,9 +9,6 @@ public:
             prev = endTime[i];
         }
         gaps.push_back(eventTime - prev);
-        for(auto i: gaps){
-            cout<<i<<' ';
-        }
         int i = 0;
         int j = 0;
         int sum = 0;
