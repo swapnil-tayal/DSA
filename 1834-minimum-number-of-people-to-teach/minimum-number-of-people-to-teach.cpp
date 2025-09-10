@@ -31,6 +31,6 @@ public:
             }
             ans = min(ans, cnt);
         }
-        return ans == 1e9 ? 0 : ans;
+        return ans;
     }
 };
