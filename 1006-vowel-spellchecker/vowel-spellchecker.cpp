@@ -5,34 +5,6 @@ public:
         return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
     }
 
-    // string check(vector<string> &wordList, string &str){
-
-    //     for(auto &i: wordList){
-    //         if(i == str) return i;
-    //     }
-
-    //     transform(str.begin(), str.end(), str.begin(), ::tolower);
-    //     for(auto &i: wordList){
-    //         string temp = i;
-    //         transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
-    //         if(str == temp){
-    //             return i;
-    //         }
-    //     }
-    //     for(auto &i: wordList){
-    //         string temp = i;
-    //         transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
-    //         if(i.size() != str.size()) continue;
-    //         int flag = true;
-    //         for(int k=0; k<str.size(); k++){
-    //             if(isVov(str[k]) && isVov(temp[k])){
-    //             }else if(str[k] != temp[k]) flag = false;
-    //         }
-    //         if(flag) return i;
-    //     }
-    //     return "";
-    // }
-
     vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
         
         set<string> orignalWords;
@@ -52,11 +24,7 @@ public:
             }
             if(vovelsCase.count(temp) == 0) vovelsCase[temp] = i;
         }
-
-        // for(auto i: lowerCase) cout<<i.first<<' '<<i.second<<'\n';
-        // cout<<'\n';
-        // for(auto i: vovelsCase) cout<<i.first<<' '<<i.second<<'\n';
-
+        
         vector<string> ans;
         for(auto &i: queries){
             if(orignalWords.count(i)){
