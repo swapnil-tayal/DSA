@@ -1,13 +1,10 @@
 class Solution {
 public:
 
-    int f(string &s1, string &s2){
-        map<char,int> mp;
-        for(auto &i: s1) mp[i]++;
-        for(auto &i: s2) mp[i]--;
-        for(auto &i: mp){
-            if(i.second != 0) return 0;
-        }return 1;
+    int f(string s1, string s2){
+        sort(s1.begin(), s1.end());
+        sort(s2.begin(), s2.end());
+        return s1 == s2;
     }
 
     vector<string> removeAnagrams(vector<string>& words) {
@@ -15,8 +12,7 @@ public:
         stack<string> st;
         for(auto &i: words){
             if(st.size() == 0) st.push(i);
-            if(f(st.top(), i)){}
-            else st.push(i);
+            if(!f(st.top(), i)) st.push(i);
         }
         vector<string> ans;
         while(st.size()){
