@@ -1,6 +1,6 @@
 class Bank {
     int n;
-    map<int, long long> mp;
+    unordered_map<int, long long> mp;
 public:
     Bank(vector<long long>& balance) {
         n = balance.size();
