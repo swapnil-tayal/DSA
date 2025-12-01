@@ -17,7 +17,6 @@ public:
         for(auto &i: batteries) e += i;
         
         long long ans = 0;
-        sort(batteries.rbegin(), batteries.rend());
         
         while(s <= e){
             
