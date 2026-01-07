@@ -14,28 +14,16 @@ class Solution {
     long long ans = 0;
 public:
 
-    long long getTotSum(TreeNode* root){
-        if(root == NULL) return 0;
-        long long sum = root->val;
-        if(root->left) sum += getTotSum(root->left);
-        if(root->right) sum += getTotSum(root->right);
-        return sum;
-    }
-
     long long f(TreeNode* root){
-        if(root == NULL) return 0;
-        long long currSum = root->val;
-        if(root->left) currSum += f(root->left);
-        if(root->right) currSum += f(root->right);
-        long long rem = sum - currSum;
-        ans = max(ans, rem * currSum);
+        if(!root) return 0;
+        long long currSum = root->val + f(root->left) + f(root->right);
+        ans = max(ans, (sum - currSum) * currSum);
         return currSum;
     }
 
     int maxProduct(TreeNode* root) {
-        
-        sum = getTotSum(root);
+        sum = f(root);
         f(root);
-        return (ans) % int(1e9+7);
+        return ans % int(1e9+7);
     }
 };
