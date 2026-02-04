@@ -32,14 +32,13 @@ public:
             if(nums[i-1] < nums[i]){
                 ans = max(ans, nums[i] + f(i+1, 3, nums));
             } else ans = 0;
-            // ans = max(ans, f(i, 0, 4, nums));
         }
         return dp[i][stage] = ans;
     }
 
     long long maxSumTrionic(vector<int>& nums) {
         
-        dp.resize(nums.size(), vector<long long>(5, -1));
+        dp.resize(nums.size(), vector<long long>(4, -1));
         return f(0, 0, nums);
     }
 };
