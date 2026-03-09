@@ -1,13 +1,20 @@
 #include <random>
 
 class Solution {
-    std::mt19937 gen{std::random_device{}()};
-    std::discrete_distribution<int> dist;
-
+    vector<int> a;
+    int sum = 0;
 public:
-    Solution(vector<int>& w) : dist(w.begin(), w.end()) { }
-    
+    Solution(vector<int>& w) { 
+        for(auto &i: w){
+            sum += i;
+            a.push_back(sum);
+        }
+    }
+
     int pickIndex() {
-        return dist(gen);
+
+        int random = rand() % sum;
+        int ind = upper_bound(a.begin(), a.end(), random) - a.begin();
+        return ind;
     }
 };
