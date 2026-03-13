@@ -1,45 +1,46 @@
 class Solution {
 public:
-
-    void bfs(vector<vector<char>> &grid, int x, int y){
-
-        int n = grid.size();
-        int m = grid[0].size();
-
-        queue<pair<int,int>> q;
-        q.push({ x, y });
-        grid[x][y] = '.';
-
-        int row[] = {-1,1,0,0};
-        int col[] = {0,0,-1,1};
-
-        while(!q.empty()){
-            
-            int x = q.front().first;
-            int y = q.front().second;
-            q.pop();
-
-            for(int k=0; k<4; k++){
-
-                int newx = x + row[k];
-                int newy = y + col[k];
-                if(newx >= 0 and newy >= 0 and newx < n and newy < m and grid[newx][newy] == 'X'){
-                    grid[newx][newy] = '.';
-                    q.push({ newx, newy });
-                }
-            }
-        }
-    }
-
     int countBattleships(vector<vector<char>>& board) {
         
+        int n = board.size();
+        int m = board[0].size();
         int ans = 0;
-        for(int i=0; i<board.size(); i++){
-            for(int j=0; j<board[0].size(); j++){
 
+        for(int i=0; i<n; i++){
+
+            int ind = 0;
+            while(ind < m){
+                char ch = board[i][ind];
+                int cnt = 0;
+                while(ind < m and board[i][ind] == ch){
+                    ind++;
+                    cnt++;
+                }
+                if(cnt > 1 and ch == 'X') ans++;
+            }
+        }        
+        for(int j=0; j<m; j++){
+
+            int ind = 0;
+            while(ind < n){
+                char ch = board[ind][j];
+                int cnt = 0;
+                while(ind < n and board[ind][j] == ch){
+                    ind++;
+                    cnt++;
+                }
+                if(cnt > 1 and ch == 'X') ans++;
+            }
+        }
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
                 if(board[i][j] == 'X'){
-                    ans++;
-                    bfs(board, i, j);
+                    int ch = 0;
+                    if(i-1 >= 0 and board[i-1][j] != '.') ch++;
+                    if(j-1 >= 0 and board[i][j-1] != '.') ch++;
+                    if(i+1 < n and board[i+1][j] != '.') ch++;
+                    if(j+1 < m and board[i][j+1] != '.') ch++;
+                    if(ch == 0) ans++;
                 }
             }
         }
