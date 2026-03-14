@@ -28,14 +28,8 @@ public:
 
     string getHappyString(int n, int k) {
 
-        for(int i=n; i<=n; i++){
-            f(n, '-', "");
-        }
+        f(n, '-', "");
         sort(arr.begin(), arr.end());
-        
-        // for(auto i: arr) cout<<i<<' ';
-        // cout<<'\n';
-
         if(arr.size() < k) return "";
         return arr[k-1];
     }
