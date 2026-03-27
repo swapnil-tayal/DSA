@@ -27,8 +27,7 @@ public:
             if(diff == currSum) return true;
             if(diff > currSum){
                 long long num = diff - currSum;
-                int ind = upper_bound(mpH[num].begin(), mpH[num].end(), i) - mpH[num].begin();
-                if(ind != mpH[num].size()){
+                if(mpH[num].size() and mpH[num].back() > i){
                     if(m == 1){
                         if(grid[i+1][0] == num || grid[n-1][0] == num) return true;
                     }else{
@@ -64,8 +63,7 @@ public:
             if(diff == currSum) return true;
             if(diff > currSum){
                 long long num = diff - currSum;
-                int ind = upper_bound(mpV[num].begin(), mpV[num].end(), j) - mpV[num].begin();
-                if(ind != mpV[num].size()){
+                if(mpV[num].size() and mpV[num].back() > j){
                     if(n == 1){
                         if(grid[0][j+1] == num || grid[0][m-1] == num) return true;
                     }else{
