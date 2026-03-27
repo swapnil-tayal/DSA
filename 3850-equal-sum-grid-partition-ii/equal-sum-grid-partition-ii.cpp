@@ -5,7 +5,7 @@ public:
         long long sum = 0;
         int n = grid.size();
         int m = grid[0].size();
-        map<long long,vector<int>> mpH, mpV;
+        unordered_map<long long,vector<int>> mpH, mpV;
         
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
