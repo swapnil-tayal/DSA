@@ -32,22 +32,25 @@ public:
         char ch = 'a';
 
         for(int i=0; i<n; i++){
-            set<int> st;
-            for(int j=i; j<n; j++){
+            
+            if(ans[i] == '-'){
+                ans[i] = ch++;
+                if(!(ans[i] >= 'a' and ans[i] <= 'z')) return "";
+            }
+            for(int j=i+1; j<n; j++){
                 if(lcp[i][j] > 0){
-                    st.insert(i);
-                    st.insert(j);
+                    ans[j] = ans[i];
                 }
             }
-            char alreadyCh = '-';
-            for(auto k: st){
-                if(ans[k] != '-') alreadyCh = ans[k];
-            }
-            char newCh = alreadyCh == '-' ? ch++ : alreadyCh;
-            if(!(newCh >= 'a' and newCh <= 'z')) return "";
-            for(auto k: st){
-                ans[k] = newCh;
-            }
+            // char alreadyCh = '-';
+            // for(auto k: st){
+            //     if(ans[k] != '-') alreadyCh = ans[k];
+            // }
+            // char newCh = alreadyCh == '-' ? ch++ : alreadyCh;
+            // if(!(newCh >= 'a' and newCh <= 'z')) return "";
+            // for(auto k: st){
+            //     ans[k] = newCh;
+            // }
         }
         string res = "";
         for(auto i: ans) res += i;
