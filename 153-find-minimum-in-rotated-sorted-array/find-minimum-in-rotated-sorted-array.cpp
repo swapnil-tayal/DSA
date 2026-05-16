@@ -5,17 +5,14 @@ public:
         int s = 0;
         int e = nums.size()-1;
         int ans = 0;
-        while(s <= e){
+        while(s < e){
 
             int mid = (s+e)/2;
-            if(nums[s] <= nums[e]){
-                e = mid-1;
-                ans = nums[s];
-
-            }else{
-                s++;
-            }
+            if(nums[mid] < nums[e]){
+                e = mid;
+            }else s = mid+1;
+            
         }
-        return ans;
+        return nums[s];
     }
 };
