@@ -3,7 +3,7 @@ public:
     int minJumps(vector<int>& arr) {
         
         int n = arr.size();
-        map<int,set<int>> mp;
+        unordered_map<int, unordered_set<int>> mp;
         for(int i=0; i<n; i++){
             mp[arr[i]].insert(i);
         }
