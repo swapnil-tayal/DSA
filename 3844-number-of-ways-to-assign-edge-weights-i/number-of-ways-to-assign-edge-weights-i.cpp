@@ -19,7 +19,6 @@ public:
             adj[i[1]].push_back(i[0]);
         }
         int depth = f(1, -1, adj);
-        cout<<depth<<'\n';
         long long ans = 1;
         for(int i=1; i<=depth-2; i++){
             ans = (ans * 2) % (long long)(1e9+7);
