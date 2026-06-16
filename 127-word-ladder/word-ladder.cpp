@@ -4,7 +4,7 @@ public:
         
         queue<string> q;
         q.push(beginWord);
-        set<string> st;
+        unordered_set<string> st;
         for(auto &i: wordList){
             st.insert(i);
         }
