@@ -3,17 +3,18 @@ public:
 
     int maximumLength(vector<int>& nums) {
         
-        unordered_map<int, int> mainMp;
-        for(auto &i: nums) mainMp[i]++;
+        unordered_map<int, int> mp;
+        for(auto &i: nums) mp[i]++;
         int ans = 0;
-        ans = max(ans, mainMp[1]%2 ? mainMp[1] : mainMp[1]-1);
-        unordered_map<int, int> mp = mainMp;
+        ans = max(ans, mp[1]%2 ? mp[1] : mp[1]-1);
+        unordered_set<int> st;
+        for(auto i: nums) st.insert(i);
 
-        for(int i=1; i<=500; i++){
+        for(auto &i: st){
 
+            if(i == 1) continue;
             int res = 0;
             int last = 0;
-            mp = mainMp;
 
             for(int k=0; k<=4; k++){
 
@@ -29,12 +30,10 @@ public:
                     }
                 }
                 if(f == 0) break;
-                // cout<<num<<' '<<mp[num]<<' '<<last<<'\n';
                 if(last == 0){
                     if(mp[num] >= 2){
                         res += 2;
                         last = 2;
-                        mp[num] -= 2;
                     }else if(mp[num] == 1){
                         res++;
                         last = 3;
@@ -44,7 +43,6 @@ public:
                     if(mp[num] >= 2){
                         res += 2;
                         last = 2;
-                        mp[num] -= 2;
                     }else if(mp[num] == 1){
                         last = 3;
                         res++;
