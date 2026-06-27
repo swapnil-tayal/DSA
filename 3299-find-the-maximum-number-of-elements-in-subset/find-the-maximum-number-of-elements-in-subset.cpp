@@ -3,22 +3,22 @@ public:
 
     int maximumLength(vector<int>& nums) {
         
-        unordered_map<long long, long long> mainMp;
+        unordered_map<int, int> mainMp;
         for(auto &i: nums) mainMp[i]++;
-        long long ans = 0;
+        int ans = 0;
         ans = max(ans, mainMp[1]%2 ? mainMp[1] : mainMp[1]-1);
-        unordered_map<long long, long long> mp = mainMp;
+        unordered_map<int, int> mp = mainMp;
 
         for(int i=1; i<=500; i++){
 
-            long long res = 0;
-            long long last = 0;
+            int res = 0;
+            int last = 0;
             mp = mainMp;
 
             for(int k=0; k<=4; k++){
 
                 int pw = pow(2, k);
-                long long val = i;
+                int val = i;
                 long long num = i;
                 int f = 1;
                 for(int q=1; q<pw; q++){
