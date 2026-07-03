@@ -16,13 +16,13 @@ public:
             if(cost > dis[node]) continue;
 
             for(auto &i: adj[node]){
-                if(dis[i.first] > i.second + cost and i.second >= mid){
+                if(dis[i.first] > i.second + cost and i.second >= mid and i.second + cost <= k){
                     dis[i.first] = i.second + cost;
                     pq.push({ dis[i.first], i.first });
                 }
             }
         }
-        return dis[n-1] <= k;
+        return dis[n-1] != LLONG_MAX;
     }
 
     int findMaxPathScore(vector<vector<int>>& edges, vector<bool>& online, long long k) {
