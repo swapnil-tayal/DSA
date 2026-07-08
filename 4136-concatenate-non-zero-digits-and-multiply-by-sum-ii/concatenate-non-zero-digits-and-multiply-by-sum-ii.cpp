@@ -38,8 +38,8 @@ public:
         }
 
         vector<int> ans;
-        for(auto i: num) cout<<i<<' ';
-        cout<<'\n';
+        // for(auto i: num) cout<<i<<' ';
+        // cout<<'\n';
 
         for(auto &i: queries){
             
