@@ -4,7 +4,7 @@ public:
         
         if(finalSum % 2 == 1) return {};
     
-        set<long long> st;
+        unordered_set<long long> st;
         long long val = 2;
     
         while(val < finalSum){
