@@ -3,21 +3,17 @@ public:
     vector<long long> maximumEvenSplit(long long finalSum) {
         
         if(finalSum % 2 == 1) return {};
-    
-        unordered_set<long long> st;
+
+        vector<long long> ans;
         long long val = 2;
     
-        while(val < finalSum){
-            if(2*val != finalSum && !st.count(val) and !st.count(finalSum - val)){
-                st.insert(val);
-                finalSum -= val;
-            }
+        while(val <= finalSum){
+            ans.push_back(val);
+            finalSum -= val;
             val += 2;
-            // cout<<val<<' '<<finalSum<<'\n';
         }
-        if(finalSum > 0) st.insert(finalSum);
-        vector<long long> a(st.begin(), st.end());
-        return a;
+        if(finalSum > 0) ans.back() += finalSum;
+        return ans;
     }
 };
 
