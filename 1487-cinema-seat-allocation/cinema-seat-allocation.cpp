@@ -2,10 +2,9 @@ class Solution {
 public:
     int maxNumberOfFamilies(int n, vector<vector<int>>& a) {
         
-        sort(a.begin(), a.end());
         int ans = 0;
 
-        set<int> st;
+        unordered_set<int> st;
         set<vector<int>> st2;
         for(auto &i: a){
             st.insert(i[0]);
