@@ -4,7 +4,7 @@ public:
         
         vector<vector<int>> a;
         vector<int> fir;
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         int sum = 0;
         int ans = 1e9;
         mp[0] = -1;
