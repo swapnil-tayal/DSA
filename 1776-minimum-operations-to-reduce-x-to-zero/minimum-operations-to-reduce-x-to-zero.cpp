@@ -3,7 +3,7 @@ public:
     int minOperations(vector<int>& nums, int x) {
         
         int n = nums.size();
-        map<int,int> mpPre, mpSuf;
+        unordered_map<int,int> mpPre, mpSuf;
         mpPre[0] = 0;
         mpSuf[0] = 0;
 
