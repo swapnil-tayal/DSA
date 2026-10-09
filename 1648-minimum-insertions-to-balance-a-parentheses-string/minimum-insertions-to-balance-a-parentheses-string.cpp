@@ -27,7 +27,6 @@ public:
                 while(cnt--) str += ')';
             }
         }
-        stack<char> st;
         int o = 0;
         int c = 0;
         for(auto &i: str){
