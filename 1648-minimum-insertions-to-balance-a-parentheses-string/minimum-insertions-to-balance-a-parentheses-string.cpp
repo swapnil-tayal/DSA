@@ -27,7 +27,6 @@ public:
                 while(cnt--) str += ')';
             }
         }
-        cout<<str<<'\n';
         stack<char> st;
         int o = 0;
         int c = 0;
