@@ -60,7 +60,6 @@ public:
             while(str.size() < maxWidth) str += " ";
             ans.push_back(str);
         }
-
         return ans;
     }
 };
