@@ -26,17 +26,12 @@ public:
                 temp.push_back(nums[j]);
             }
             if(temp.size() > 1 && temp[0] == temp.back()) temp.pop_back();
-            // for(auto &i: temp) cout<<i<<' ';
-            // cout<<'\n';
             int x = temp.size();
-            vector<int> newTemp;
             int ind = min_element(temp.begin(), temp.end()) - temp.begin();
             for(int j=ind; j<ind+x; j++){
                 a.push_back(temp[j % x]);
             }
         }
-        // for(auto &i: a) cout<<i<<' ';
-        // cout<<'\n';
         return is_sorted(a.begin(), a.end());
     }
 
@@ -46,10 +41,8 @@ public:
         vector<int> a = divisors(n);
         int sum = 0;
         for(auto &i: a){
-            cout<<i<<'\n';
             if(f(nums, i)){
                 sum += i;
-                // cout<<i<<'\n';
             }
         }
         return sum;
