@@ -10,7 +10,7 @@ public:
         char mini = *min_element(s.begin(), s.end());
         char maxi = *max_element(s.begin(), s.end());
 
-        map<char,int> mp;
+        unordered_map<char,int> mp;
         for(auto &i: s) mp[i]++;
 
         if(s[0] == mini) return 1;
