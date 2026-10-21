@@ -3,32 +3,19 @@ public:
     int minOperations(string s) {
         
         int n = s.size();
-        
-        if(n == 2 and s[0] > s[n-1]) return -1;
 
         if(is_sorted(s.begin(), s.end())) return 0;
-        
-        string first = s.substr(0, n-1);
-        sort(first.begin(), first.end());
-        if(first.back() <= s[n-1]) return 1;
+        if(n <= 2) return -1;
 
-        string last = s.substr(1);
-        sort(last.begin(), last.end());
-        if(last[0] >= s[0]) return 1;
+        char mini = *min_element(s.begin(), s.end());
+        char maxi = *max_element(s.begin(), s.end());
 
-        string newS = s;
-        sort(newS.begin(), newS.begin() + n-1);
-        sort(newS.begin()+1, newS.end());
-        if(is_sorted(newS.begin(), newS.end())){
-            return 2;
-        }
+        map<char,int> mp;
+        for(auto &i: s) mp[i]++;
 
-        newS = s;
-        sort(newS.begin()+1, newS.end());
-        sort(newS.begin(), newS.begin() + n-1);
-        if(is_sorted(newS.begin(), newS.end())){
-            return 2;
-        }
-        return 3;
+        if(s[0] == mini) return 1;
+        if(s[n-1] == maxi) return 1;
+        if(s[n-1] == mini and s[0] == maxi and mp[mini] == 1 and mp[maxi] == 1) return 3;
+        return 2;
     }
 };
