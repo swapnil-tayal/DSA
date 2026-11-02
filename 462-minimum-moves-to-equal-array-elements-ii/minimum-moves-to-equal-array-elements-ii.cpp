@@ -15,6 +15,7 @@ public:
             ans += abs(i - medi);
             ans2 += abs(i - medi2);
         }
+        return ans;
         return min(ans, ans2);
     }
 };
