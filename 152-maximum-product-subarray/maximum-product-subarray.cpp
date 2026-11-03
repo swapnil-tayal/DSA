@@ -49,8 +49,6 @@ public:
         if(temp.size()) a.push_back(temp);
 
         for(auto &i: a){
-            for(auto k: i) cout<<k<<' ';
-            cout<<'\n';
             ans = max(ans, f(i));
         }
         return ans;
