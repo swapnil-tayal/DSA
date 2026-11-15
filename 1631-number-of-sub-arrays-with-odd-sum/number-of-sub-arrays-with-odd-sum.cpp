@@ -12,8 +12,8 @@ public:
 
             sum += arr[i];
 
-            if(sum % 2 == 0) ans += odd;
-            else ans += even;
+            if(sum % 2 == 0) ans += (i+1) - even;
+            else ans += (i+1) - odd;
             ans %= int(1e9+7);
 
             if(sum % 2 == 0) even++;
